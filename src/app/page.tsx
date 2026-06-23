@@ -32,10 +32,31 @@ export default function Home() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
     const handleMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
     window.addEventListener('mousemove', handleMove);
     return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
+  useEffect(() => {
+    const el = imageRef.current;
+    if (!el) return;
+    const handleTilt = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      setTilt({ x: y * -20, y: x * 20 });
+    };
+    const elRef = el;
+    elRef.addEventListener('mousemove', handleTilt);
+    elRef.addEventListener('mouseleave', () => setTilt({ x: 0, y: 0 }));
+    return () => {
+      elRef.removeEventListener('mousemove', handleTilt);
+      elRef.removeEventListener('mouseleave', () => setTilt({ x: 0, y: 0 }));
+    };
   }, []);
 
   return (
@@ -83,20 +104,93 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }} className="relative flex justify-center">
-              <div className="relative w-72 h-72 md:w-96 md:h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl opacity-30 animate-pulse" />
-                <div className="relative w-full h-full rounded-full border-2 border-zinc-800 overflow-hidden bg-zinc-900">
-                  <Image src="/mohsin-photo.png" alt="Mohsin" fill className="object-cover" priority />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                  <div className="text-2xl font-bold text-white">41+</div>
-                  <div className="text-xs text-zinc-500">GitHub Repos</div>
-                </div>
-                <div className="absolute -top-4 -left-4 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                  <div className="text-2xl font-bold text-white">7</div>
-                  <div className="text-xs text-zinc-500">Research Papers</div>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative flex justify-center"
+            >
+              <div ref={imageRef} className="relative w-80 h-80 md:w-[28rem] md:h-[28rem]" style={{ perspective: '1000px' }}>
+                {/* Orbital rings */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border border-blue-500/20"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_20px_rgba(96,165,250,0.8)]" />
+                </motion.div>
+                <motion.div
+                  className="absolute inset-4 rounded-full border border-purple-500/20"
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
+                >
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.8)]" />
+                </motion.div>
+                <motion.div
+                  className="absolute inset-8 rounded-full border border-emerald-500/15"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+                >
+                  <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_20px_rgba(52,211,153,0.8)]" />
+                </motion.div>
+
+                {/* 3D Tilt Card */}
+                <motion.div
+                  className="relative w-full h-full"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                    transition: 'transform 0.1s ease-out',
+                  }}
+                >
+                  {/* Clean image with 3D perspective */}
+                  <div className="relative w-full h-full" style={{ transform: 'translateZ(30px)' }}>
+                    <div className="absolute inset-0 rounded-[3rem] overflow-hidden border border-zinc-700 shadow-2xl">
+                      <Image src="/mohsin-photo.png" alt="Mohsin" fill className="object-cover" priority />
+                    </div>
+                  </div>
+
+                  {/* Floating label cards */}
+                  <div className="absolute -bottom-2 -right-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
+                    <div className="text-2xl font-bold text-white">41+</div>
+                    <div className="text-xs text-zinc-400">GitHub Repos</div>
+                  </div>
+                  <div className="absolute -top-2 -left-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
+                    <div className="text-2xl font-bold text-white">7</div>
+                    <div className="text-xs text-zinc-400">Research Papers</div>
+                  </div>
+
+                  {/* Floating particles around the image */}
+                  {[
+                    { color: '#3b82f6', left: '25%', top: '30%', dur: 2.5 },
+                    { color: '#8b5cf6', left: '70%', top: '25%', dur: 3 },
+                    { color: '#10b981', left: '75%', top: '65%', dur: 2 },
+                    { color: '#f59e0b', left: '30%', top: '70%', dur: 3.5 },
+                    { color: '#ef4444', left: '55%', top: '20%', dur: 2.8 },
+                    { color: '#ec4899', left: '65%', top: '75%', dur: 2.2 },
+                  ].map((p, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1.5 h-1.5 rounded-full"
+                      style={{
+                        backgroundColor: p.color,
+                        left: p.left,
+                        top: p.top,
+                        transform: 'translateZ(60px)',
+                      }}
+                      animate={{
+                        y: [0, -15, 0],
+                        opacity: [0.6, 1, 0.6],
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: p.dur,
+                        delay: i * 0.3,
+                      }}
+                    />
+                  ))}
+                </motion.div>
               </div>
             </motion.div>
           </div>

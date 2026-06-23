@@ -1,0 +1,300 @@
+'use client';
+
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+const channel = {
+  name: 'StudyHub',
+  handle: '@studyhub991',
+  url: 'https://t.me/studyhub991',
+  subscribers: 3058,
+  files: 76,
+  description: '🚀 Level up your studies with StudyHub! 🤖 StudyHub Bot: @StudyhubBDBot 🌐 Explore our resources: https://studyhubb.great-site.net 📺 Watch tutorials: https://www.youtube.com/@studyhub991 🗓️ Routine generator: https://routine-pro-fawn.vercel.app/',
+  topics: ['Academic Resources', 'Tech & Innovation', 'Programming', 'Study Tips', 'AI & ML', 'Cybersecurity'],
+};
+
+const fileTypes = [
+  { label: 'PDF Notes', icon: '📄', count: 28, color: 'from-red-500/20 to-orange-500/20' },
+  { label: 'Code Snippets', icon: '💻', count: 18, color: 'from-sky-500/20 to-blue-500/20' },
+  { label: 'Study Guides', icon: '📖', count: 15, color: 'from-emerald-500/20 to-teal-500/20' },
+  { label: 'Tutorials', icon: '🎥', count: 10, color: 'from-purple-500/20 to-pink-500/20' },
+  { label: 'Cheat Sheets', icon: '📝', count: 3, color: 'from-yellow-500/20 to-amber-500/20' },
+  { label: 'Tools', icon: '🔧', count: 2, color: 'from-zinc-500/20 to-zinc-400/20' },
+];
+
+const recentPosts = [
+  { type: 'Resource', title: 'OS Mid Term Syllabus — Complete Guide', file: 'PDF', size: '2.4 MB', time: '2 days ago' },
+  { type: 'Code', title: 'EIGRP Configuration Script — Cisco Packet Tracer', file: 'TXT', size: '1.1 KB', time: '5 days ago' },
+  { type: 'Guide', title: 'Transportation Model — EM Final Term Notes', file: 'PDF', size: '3.7 MB', time: '1 week ago' },
+  { type: 'Tutorial', title: 'Microprocessor ALU Design — Step by Step', file: 'PDF', size: '4.2 MB', time: '2 weeks ago' },
+];
+
+function FloatingIcon({ icon, delay, x, y }: { icon: string; delay: number; x: string; y: string }) {
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{ left: x, top: y }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: [0, 1, 1, 0], scale: [0, 1, 1, 0], y: [0, -30, -60, -100] }}
+      transition={{ duration: 6, repeat: Infinity, delay, ease: 'easeOut' }}
+    >
+      <span className="text-2xl opacity-30">{icon}</span>
+    </motion.div>
+  );
+}
+
+export default function TelegramPage() {
+  return (
+    <>
+      <div className="fixed inset-0 bg-gradient-to-br from-sky-950/30 via-black to-blue-950/30 pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.06),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.06),transparent_50%)] pointer-events-none" />
+      <div className="relative">
+        <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-black/60" />
+          <div className="absolute top-10 right-40 w-64 h-64 bg-sky-500/10 rounded-full blur-[100px] animate-pulse" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/8 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 left-1/2 w-48 h-48 bg-cyan-500/8 rounded-full blur-[80px]" />
+
+          <FloatingIcon icon="📄" delay={0} x="15%" y="20%" />
+          <FloatingIcon icon="💻" delay={1.5} x="75%" y="30%" />
+          <FloatingIcon icon="📖" delay={3} x="85%" y="60%" />
+          <FloatingIcon icon="🎥" delay={4.5} x="10%" y="70%" />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 w-full py-20">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="flex items-center gap-4 mb-6">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+                  className="relative w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 shadow-xl shadow-sky-500/10 bg-black flex items-center justify-center"
+                >
+                  <Image src="/logos/telegram logo.png" alt="Telegram" width={64} height={64} className="object-cover" />
+                </motion.div>
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+                    Telegram Channel
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold text-white mt-2">{channel.name}</h1>
+                </div>
+              </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-zinc-400 text-lg max-w-2xl mb-6 leading-relaxed"
+              >
+                {channel.description}
+              </motion.p>
+              <div className="flex items-center gap-3 flex-wrap">
+                <motion.a
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold transition-all shadow-lg shadow-sky-500/25"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
+                  Join Channel
+                </motion.a>
+                <div className="flex items-center gap-4 text-sm text-zinc-500">
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>{channel.subscribers.toLocaleString()} subscribers</motion.span>
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }} className="w-1 h-1 rounded-full bg-zinc-600" />
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>{channel.files} shared files</motion.span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <div className="max-w-5xl mx-auto px-4 pb-20">
+          <div className="grid md:grid-cols-3 gap-4 mb-10">
+            {[
+              { label: 'Subscribers', value: channel.subscribers.toLocaleString(), icon: '👥', delay: 0 },
+              { label: 'Shared Files', value: channel.files, icon: '📁', delay: 0.05 },
+              { label: 'Topics', value: '6', icon: '🎯', delay: 0.1 },
+            ].map((stat) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: stat.delay }}
+                className="relative rounded-xl border border-white/10 bg-white/[0.03] p-5 group hover:border-sky-500/20 transition-all overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative text-lg mb-1 block">{stat.icon}</span>
+                <p className="relative text-2xl font-bold text-white">{stat.value}</p>
+                <p className="relative text-xs text-zinc-500 mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+            <span className="text-xs font-semibold tracking-widest text-sky-400 uppercase shrink-0">File Categories</span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-10">
+            {fileTypes.map((f, i) => (
+              <motion.div
+                key={f.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04 }}
+                className="relative rounded-xl border border-white/10 bg-white/[0.03] p-4 text-center group hover:border-sky-500/20 transition-all overflow-hidden"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${f.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <span className="relative text-2xl mb-1 block">{f.icon}</span>
+                <p className="relative text-lg font-bold text-white">{f.count}</p>
+                <p className="relative text-[10px] text-zinc-500 mt-0.5">{f.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+            <span className="text-xs font-semibold tracking-widest text-sky-400 uppercase shrink-0">Recent Posts</span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden mb-10">
+            <div className="p-1">
+              {recentPosts.map((post, i) => (
+                <motion.div
+                  key={post.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.03] transition-colors group"
+                >
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${
+                    post.file === 'PDF' ? 'bg-red-500/15 text-red-300' : 'bg-sky-500/15 text-sky-300'
+                  }`}>
+                    {post.file}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-zinc-300 truncate group-hover:text-white transition-colors">{post.title}</p>
+                    <p className="text-[10px] text-zinc-600">{post.size}</p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-600">{post.type}</span>
+                    <span className="text-[10px] text-zinc-600">{post.time}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-4 mb-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 flex flex-col lg:col-span-2 relative group hover:border-sky-500/30 transition-all"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="relative flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center shrink-0 overflow-hidden ring-1 ring-white/10">
+                  <Image src="/logos/telegram logo.png" alt="" width={40} height={40} className="object-cover" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{channel.handle}</p>
+                  <p className="text-xs text-zinc-500">{channel.subscribers.toLocaleString()} subscribers</p>
+                </div>
+              </div>
+              <p className="relative text-xs text-zinc-500 leading-relaxed flex-1">
+                Academic resources, tech insights, programming tutorials, and study materials shared regularly. Join thousands of students leveling up their skills.
+              </p>
+              <a
+                href={channel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-medium transition-all shadow-lg shadow-sky-500/20 mt-3"
+              >
+                Open in Telegram
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 flex flex-col relative group hover:border-red-500/30 transition-all"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="relative flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">YouTube Channel</p>
+                  <p className="text-xs text-zinc-500">@studyhub991</p>
+                </div>
+              </div>
+              <p className="relative text-xs text-zinc-500 leading-relaxed flex-1">
+                Video tutorials on OS, CN, Microprocessor, COA & more CSE topics.
+              </p>
+              <a
+                href="https://www.youtube.com/@studyhub991"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 text-white text-sm font-medium transition-all shadow-lg shadow-red-500/20 mt-3"
+              >
+                Visit YouTube
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
+            </motion.div>
+          </div>
+
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+            <span className="text-xs font-semibold tracking-widest text-sky-400 uppercase shrink-0">Bot</span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl border border-white/10 bg-gradient-to-br from-sky-500/5 to-blue-500/5 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:border-sky-500/30 transition-all group"
+          >
+            <motion.div
+              whileHover={{ rotate: [0, -10, 10, -5, 0] }}
+              transition={{ duration: 0.5 }}
+              className="w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 bg-black flex items-center justify-center"
+            >
+              <Image src="/logos/StudyHubBot.png" alt="StudyHub Bot" width={64} height={64} className="object-cover" />
+            </motion.div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-base font-semibold text-white">StudyHub Bot</h3>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">Active</span>
+              </div>
+              <p className="text-xs text-zinc-500 mb-1">@StudyhubBDBot</p>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Your AI-powered study assistant on Telegram. Get academic resources, routine schedules, 
+                and instant access to StudyHub&apos;s learning materials directly in your chat.
+              </p>
+            </div>
+            <motion.a
+              href="https://t.me/StudyhubBDBot"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-medium transition-all shadow-lg shadow-sky-500/20 shrink-0"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
+              Start Bot
+            </motion.a>
+          </motion.div>
+        </div>
+      </div>
+    </>
+  );
+}
