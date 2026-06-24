@@ -1,22 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+
 
 const photos = [
-  { src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', w: 3, h: 4, alt: 'Nature landscape' },
-  { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470', w: 4, h: 3, alt: 'Mountain view' },
-  { src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05', w: 3, h: 4, alt: 'Forest path' },
-  { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e', w: 4, h: 3, alt: 'Sunlight through trees' },
-  { src: 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde', w: 4, h: 3, alt: 'Cityscape at dusk' },
-  { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e', w: 3, h: 4, alt: 'Mountain range' },
-  { src: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba', w: 4, h: 3, alt: 'Ocean horizon' },
-  { src: 'https://images.unsplash.com/photo-1518173946687-a36f968f7d9b', w: 3, h: 4, alt: 'Street photography' },
-  { src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4', w: 4, h: 3, alt: 'Starry night' },
-  { src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d', w: 3, h: 4, alt: 'Urban architecture' },
-  { src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e', w: 4, h: 3, alt: 'Autumn colors' },
-  { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e', w: 3, h: 4, alt: 'River view' },
-];
+  'photo-1.jpg', 'photo-2.jpg', 'photo-3.jpg', 'photo-4.jpg', 'photo-5.jpg',
+  'photo-6.jpg', 'photo-7.jpg', 'photo-8.webp', 'photo-9.webp', 'photo-10.jpg',
+  'photo-11.jpg', 'photo-12.webp', 'photo-13.webp', 'photo-14.webp', 'photo-15.jpg',
+  'photo-16.jpg', 'photo-17.jpg', 'photo-18.jpg', 'photo-19.webp', 'photo-20.jpg',
+  'photo-21.jpg',
+].map((f, i) => ({ src: `/photography/${f}`, alt: `Photography ${i + 1}` }));
 
 const instagram = {
   handle: '@mihmahmudeli2002',
@@ -130,11 +123,10 @@ export default function PhotographyPage() {
                   transition={{ delay: i * 0.03 }}
                   className="relative group rounded-xl overflow-hidden border border-white/10 break-inside-avoid"
                 >
-                  <Image
+                  <img
                     src={photo.src}
                     alt={photo.alt}
-                    width={400}
-                    height={photo.h / photo.w * 400}
+                    loading="lazy"
                     className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
