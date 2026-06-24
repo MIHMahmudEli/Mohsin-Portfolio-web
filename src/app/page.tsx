@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -61,7 +61,6 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px]" style={{ transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)` }} />
@@ -85,7 +84,7 @@ export default function Home() {
               </h1>
               <p className="text-lg md:text-xl text-zinc-400 mb-8 leading-relaxed max-w-lg">
                 CSE student, full-stack developer, and researcher. I build web apps, mobile apps, games, 
-                and AI tools — currently working on 7 research papers.
+                and AI tools — with 6 research papers in ML, NLP, and CV.
               </p>
               <div className="flex items-center gap-4 flex-wrap">
                 <Link href="/projects" className="group relative px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold overflow-hidden transition-all hover:bg-zinc-200">
@@ -98,9 +97,9 @@ export default function Home() {
               </div>
 
               <div className="flex items-center gap-6 mt-10">
-                {['GitHub', 'Instagram', 'LinkedIn'].map((s) => (
-                  <a key={s} href="#" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">{s}</a>
-                ))}
+                <a href="https://github.com/MIHMahmudEli" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">GitHub</a>
+                <a href="https://instagram.com/mihmahmudeli2002" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">Instagram</a>
+                <a href="https://linkedin.com/in/mihmahmudeli" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">LinkedIn</a>
               </div>
             </motion.div>
 
@@ -111,7 +110,6 @@ export default function Home() {
               className="relative flex justify-center"
             >
               <div ref={imageRef} className="relative w-80 h-80 md:w-[28rem] md:h-[28rem]" style={{ perspective: '1000px' }}>
-                {/* Orbital rings */}
                 <motion.div
                   className="absolute inset-0 rounded-full border border-blue-500/20"
                   animate={{ rotate: 360 }}
@@ -135,7 +133,6 @@ export default function Home() {
                   <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_20px_rgba(52,211,153,0.8)]" />
                 </motion.div>
 
-                {/* 3D Tilt Card */}
                 <motion.div
                   className="relative w-full h-full"
                   style={{
@@ -144,24 +141,21 @@ export default function Home() {
                     transition: 'transform 0.1s ease-out',
                   }}
                 >
-                  {/* Clean image with 3D perspective */}
                   <div className="relative w-full h-full" style={{ transform: 'translateZ(30px)' }}>
                     <div className="absolute inset-0 rounded-[3rem] overflow-hidden border border-zinc-700 shadow-2xl">
                       <Image src="/mohsin-photo.png" alt="Mohsin" fill className="object-cover" priority />
                     </div>
                   </div>
 
-                  {/* Floating label cards */}
                   <div className="absolute -bottom-2 -right-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
                     <div className="text-2xl font-bold text-white">41+</div>
                     <div className="text-xs text-zinc-400">GitHub Repos</div>
                   </div>
                   <div className="absolute -top-2 -left-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
-                    <div className="text-2xl font-bold text-white">7</div>
+                    <div className="text-2xl font-bold text-white">6</div>
                     <div className="text-xs text-zinc-400">Research Papers</div>
                   </div>
 
-                  {/* Floating particles around the image */}
                   {[
                     { color: '#3b82f6', left: '25%', top: '30%', dur: 2.5 },
                     { color: '#8b5cf6', left: '70%', top: '25%', dur: 3 },
@@ -179,15 +173,8 @@ export default function Home() {
                         top: p.top,
                         transform: 'translateZ(60px)',
                       }}
-                      animate={{
-                        y: [0, -15, 0],
-                        opacity: [0.6, 1, 0.6],
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: p.dur,
-                        delay: i * 0.3,
-                      }}
+                      animate={{ y: [0, -15, 0], opacity: [0.6, 1, 0.6] }}
+                      transition={{ repeat: Infinity, duration: p.dur, delay: i * 0.3 }}
                     />
                   ))}
                 </motion.div>
@@ -204,7 +191,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ABOUT + SKILLS */}
       <section className="py-32 bg-zinc-950">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -214,8 +200,8 @@ export default function Home() {
               <p className="text-zinc-400 leading-relaxed text-lg">
                 I&apos;m a CSE student at American International University-Bangladesh with a deep passion for 
                 full-stack development, mobile apps, game development, and ML research. I&apos;ve built platforms 
-                used by hundreds of students and I&apos;m currently pushing 7 research papers across 5G networks, 
-                NLP, cybersecurity, and EdTech.
+                used by hundreds of students and I&apos;m actively working on 6 research papers spanning AI text 
+                detection, 5G networks, NLP, and computer vision.
               </p>
               <div className="space-y-6">
                 {[
@@ -265,7 +251,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROJECTS SHOWCASE */}
       <section className="py-32 bg-black">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-end justify-between mb-16">
@@ -314,14 +299,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS BANNER */}
       <section className="py-20 bg-zinc-950 border-y border-zinc-900">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { num: '41', label: 'GitHub Repos', desc: 'Public repositories' },
+              { num: '41+', label: 'GitHub Repos', desc: 'Public repositories' },
               { num: '10+', label: 'Apps Built', desc: 'Web, mobile & desktop' },
-              { num: '7', label: 'Research Papers', desc: 'ML, NLP, Cybersecurity' },
+              { num: '6', label: 'Research Papers', desc: 'ML, NLP, CV, Telecom' },
               { num: '2', label: 'Apps Launched', desc: 'Production deployments' },
             ].map((s, i) => (
               <motion.div
@@ -341,15 +325,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GAMES + RESEARCH PREVIEW */}
       <section className="py-32 bg-black">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <div className="grid md:grid-cols-3 gap-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <span className="text-xs font-semibold tracking-[0.2em] text-green-400 uppercase">Play</span>
-              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Games I Built</h3>
-              <p className="text-zinc-400 text-sm mb-6">From alpha-beta pruning to game engines — each project taught me something new.</p>
-              <div className="space-y-3">
+              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Games</h3>
+              <p className="text-zinc-400 text-sm mb-6">From alpha-beta pruning to game engines.</p>
+              <div className="space-y-3 mb-6">
                 {[
                   { title: 'Tic-Tac-Toe (Alpha-Beta)', desc: 'AI that always wins' },
                   { title: 'Counting Game', desc: 'Game theory strategy' },
@@ -361,46 +344,63 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link href="/games" className="inline-flex mt-6 text-sm text-green-400 hover:text-green-300 transition-colors">
+              <Link href="/games" className="inline-flex text-sm text-green-400 hover:text-green-300 transition-colors">
                 View All Games &rarr;
               </Link>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
               <span className="text-xs font-semibold tracking-[0.2em] text-yellow-400 uppercase">Research</span>
-              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Active Research</h3>
-              <p className="text-zinc-400 text-sm mb-6">7 papers in progress across ML, NLP, 5G, cybersecurity, and EdTech.</p>
-              <div className="space-y-3">
+              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Papers</h3>
+              <p className="text-zinc-400 text-sm mb-6">6 papers across AI, ML, NLP, and CV.</p>
+              <div className="space-y-3 mb-6">
                 {[
-                  { title: '5G Network Traffic Forecasting', field: 'ML / Telecom' },
-                  { title: 'NLP Disease Pattern Discovery', field: 'NLP / Healthcare' },
-                  { title: 'AI-Driven Adaptive Learning', field: 'AI / Education' },
+                  { title: 'PIRD — AI Text Detection', field: 'NLP / AI' },
+                  { title: '5G Network Traffic Prediction', field: 'Telecom / ML' },
+                  { title: 'Food Price Volatility', field: 'Data Science' },
                 ].map((r) => (
                   <div key={r.title} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800">
-                    <div className="flex items-start justify-between">
-                      <h4 className="text-sm font-medium text-white">{r.title}</h4>
-                      <span className="text-[10px] px-2 py-0.5 bg-yellow-900/50 text-yellow-400 rounded-full">In Progress</span>
-                    </div>
+                    <h4 className="text-sm font-medium text-white">{r.title}</h4>
                     <p className="text-xs text-zinc-500 mt-1">{r.field}</p>
                   </div>
                 ))}
               </div>
-              <Link href="/research" className="inline-flex mt-6 text-sm text-yellow-400 hover:text-yellow-300 transition-colors">
+              <Link href="/research" className="inline-flex text-sm text-yellow-400 hover:text-yellow-300 transition-colors">
                 View All Research &rarr;
+              </Link>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+              <span className="text-xs font-semibold tracking-[0.2em] text-amber-400 uppercase">Photography</span>
+              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Lens</h3>
+              <p className="text-zinc-400 text-sm mb-6">Capturing moments through the lens.</p>
+              <div className="space-y-3 mb-6">
+                {[
+                  { title: 'Instagram', desc: '@mihmahmudeli2002' },
+                  { title: 'Nature & Landscape', desc: 'Documentary style' },
+                  { title: 'Street Photography', desc: 'Urban stories' },
+                ].map((g) => (
+                  <div key={g.title} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800">
+                    <h4 className="text-sm font-medium text-white">{g.title}</h4>
+                    <p className="text-xs text-zinc-500 mt-1">{g.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/photography" className="inline-flex text-sm text-amber-400 hover:text-amber-300 transition-colors">
+                View Gallery &rarr;
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* GITHUB ACTIVITY */}
       <section className="py-20 bg-zinc-950">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase">Activity</span>
-            <h2 className="text-2xl md:text-4xl font-bold text-white mt-3 mb-6">Let&apos;s Connect</h2>
+            <span className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase">Connect</span>
+            <h2 className="text-2xl md:text-4xl font-bold text-white mt-3 mb-6">Let&apos;s Work Together</h2>
             <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-              I&apos;m always open to collaborations, research discussions, or just a conversation about tech.
+              Open to collaborations, research discussions, or just a conversation about tech.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <a href="mailto:mohsinibnahossain@gmail.com" className="px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all">
