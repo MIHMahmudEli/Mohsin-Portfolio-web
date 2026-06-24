@@ -13,7 +13,7 @@ const channel = {
   views: 14979,
   telegram: {
     handle: 'studyhub991',
-    subscribers: 3056,
+    subscribers: 3058,
     files: 76,
     url: 'https://t.me/studyhub991',
   },
@@ -65,16 +65,16 @@ export default function YouTubePage() {
           </div>
           <div className="relative z-10 max-w-5xl mx-auto px-4 w-full py-20">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="relative w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-red-500/30 shadow-xl shadow-red-500/10 bg-black flex items-center justify-center">
-                  <Image src="/logos/project logo.png" alt="" width={64} height={64} className="object-cover" />
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400 mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                  YouTube Channel
                 </div>
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-                    YouTube Channel
+                <div className="flex items-center gap-4">
+                  <div className="relative w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-red-500/30 shadow-xl shadow-red-500/10 bg-black flex items-center justify-center">
+                    <Image src="/logos/project logo.png" alt="" width={64} height={64} className="object-cover" />
                   </div>
-                  <h1 className="text-4xl md:text-6xl font-bold text-white mt-2">{channel.name}</h1>
+                  <h1 className="text-4xl md:text-6xl font-bold text-white">{channel.name}</h1>
                 </div>
               </div>
               <p className="text-zinc-400 text-lg max-w-xl mb-8">{channel.handle} &mdash; Academic tutorials & study resources for CSE students</p>

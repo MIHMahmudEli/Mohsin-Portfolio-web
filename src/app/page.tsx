@@ -219,7 +219,7 @@ export default function Home() {
               </p>
               <div className="space-y-6">
                 {[
-                  { label: 'Email', value: 'mihmahmudeli@gmail.com' },
+                  { label: 'Email', value: 'mohsinibnahossain@gmail.com' },
                   { label: 'Location', value: 'Bangladesh' },
                   { label: 'Instagram', value: '@mihmahmudeli2002 — Photography' },
                 ].map((item) => (
@@ -403,7 +403,7 @@ export default function Home() {
               I&apos;m always open to collaborations, research discussions, or just a conversation about tech.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a href="mailto:mihmahmudeli@gmail.com" className="px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all">
+              <a href="mailto:mohsinibnahossain@gmail.com" className="px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all">
                 Email Me
               </a>
               <a href="https://github.com/MIHMahmudEli" target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-900 transition-all">
