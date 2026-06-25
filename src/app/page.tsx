@@ -1,421 +1,582 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const projects = [
-  { title: 'StudyHub', desc: 'Academic note-sharing platform with moderation & gamification — used by hundreds of students', slug: 'studyhub', tech: ['PHP', 'MySQL', 'JavaScript'], color: '#6366f1' },
-  { title: 'RoutinePro', desc: 'Smart university class routine generator with conflict-free scheduling and gap optimization', slug: 'routinepro', tech: ['JavaScript', 'CSS', 'Glassmorphism'], color: '#ec4899' },
-  { title: 'TrueNetMeter', desc: 'Premium internet speed test with circular speedometer and multi-stream algorithms', slug: 'truenetmeter', tech: ['PHP', 'JavaScript'], color: '#f59e0b' },
-  { title: 'Automata Playground', desc: 'Interactive visualization tool for automata theory concepts', slug: 'automata-playground', tech: ['TypeScript', 'React'], color: '#10b981' },
-  { title: 'Tic-Tac-Toe AI', desc: 'Alpha-beta pruning algorithm — computer always wins. Built to understand game AI', slug: 'tic-tac-toe', tech: ['JavaScript', 'Algorithm'], color: '#8b5cf6' },
-  { title: 'Counting Game', desc: 'Number game against a smart computer opponent using game theory', slug: 'counting-game', tech: ['JavaScript'], color: '#ef4444' },
-];
-
-const skills = [
-  { name: 'TypeScript', level: 85, color: '#3178c6', icon: 'TS' },
-  { name: 'JavaScript', level: 92, color: '#f1e05a', icon: 'JS' },
-  { name: 'Python', level: 75, color: '#3572A5', icon: 'Py' },
-  { name: 'React', level: 88, color: '#61dafb', icon: 'R' },
-  { name: 'Next.js', level: 82, color: '#000000', icon: 'N' },
-  { name: 'NestJS', level: 78, color: '#e0234e', icon: 'Ns' },
-  { name: 'Kotlin', level: 70, color: '#A97BFF', icon: 'K' },
-  { name: 'Tailwind', level: 85, color: '#06b6d4', icon: 'T' },
-];
-
-export default function Home() {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const imageRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, []);
-
-  useEffect(() => {
-    const el = imageRef.current;
-    if (!el) return;
-    const handleTilt = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      setTilt({ x: y * -20, y: x * 20 });
-    };
-    const elRef = el;
-    elRef.addEventListener('mousemove', handleTilt);
-    elRef.addEventListener('mouseleave', () => setTilt({ x: 0, y: 0 }));
-    return () => {
-      elRef.removeEventListener('mousemove', handleTilt);
-      elRef.removeEventListener('mouseleave', () => setTilt({ x: 0, y: 0 }));
-    };
-  }, []);
+function FloatingShape({ delay = 0, size = 60, color = 'blue', x = 0, y = 0, duration = 20 }) {
+  const colors: Record<string, string> = {
+    blue: 'bg-blue-500/10 border-blue-500/20',
+    purple: 'bg-purple-500/10 border-purple-500/20',
+    pink: 'bg-pink-500/10 border-pink-500/20',
+    emerald: 'bg-emerald-500/10 border-emerald-500/20',
+    amber: 'bg-amber-500/10 border-amber-500/20',
+  };
 
   return (
-    <>
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px]" style={{ transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)` }} />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-[128px]" style={{ transform: `translate(${-mousePos.x * 0.015}px, ${-mousePos.y * 0.015}px)` }} />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black" />
-        </motion.div>
+    <motion.div
+      className={`absolute rounded-full border ${colors[color]}`}
+      style={{ width: size, height: size, left: `${x}%`, top: `${y}%` }}
+      animate={{
+        x: [0, 30, -20, 15, 0],
+        y: [0, -25, 15, -10, 0],
+        scale: [1, 1.1, 0.95, 1.05, 1],
+        rotate: [0, 45, -30, 15, 0],
+      }}
+      transition={{ repeat: Infinity, duration, delay, ease: 'easeInOut' }}
+    />
+  );
+}
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 w-full">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-zinc-700 rounded-full">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs text-zinc-400 tracking-wide">Available for opportunities</span>
-              </motion.div>
+function GridBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
+        <defs>
+          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+    </div>
+  );
+}
 
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
-                Hi, I&apos;m{' '}
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Mohsin
-                </span>
-              </h1>
-              <p className="text-lg md:text-xl text-zinc-400 mb-8 leading-relaxed max-w-lg">
-                CSE student, full-stack developer, and researcher. I build web apps, mobile apps, games, 
-                and AI tools — with 6 research papers in ML, NLP, and CV.
-              </p>
-              <div className="flex items-center gap-4 flex-wrap">
-                <Link href="/projects" className="group relative px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold overflow-hidden transition-all hover:bg-zinc-200">
-                  View My Work
-                </Link>
-                <a href="https://github.com/MIHMahmudEli" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-900 transition-all">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-              </div>
+function HeroSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-              <div className="flex items-center gap-6 mt-10">
-                <a href="https://github.com/MIHMahmudEli" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">GitHub</a>
-                <a href="https://instagram.com/mihmahmudeli2002" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">Instagram</a>
-                <a href="https://linkedin.com/in/mihmahmudeli" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wider uppercase">LinkedIn</a>
-              </div>
+  useEffect(() => {
+    const handleMouse = (e: MouseEvent) => {
+      setMousePos({ x: (e.clientX / window.innerWidth - 0.5) * 2, y: (e.clientY / window.innerHeight - 0.5) * 2 });
+    };
+    window.addEventListener('mousemove', handleMouse);
+    return () => window.removeEventListener('mousemove', handleMouse);
+  }, []);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  return (
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+      <GridBackground />
+
+      <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0">
+        <FloatingShape delay={0} size={300} color="blue" x={-10} y={20} duration={25} />
+        <FloatingShape delay={3} size={200} color="purple" x={80} y={10} duration={30} />
+        <FloatingShape delay={6} size={150} color="pink" x={70} y={70} duration={22} />
+        <FloatingShape delay={2} size={100} color="emerald" x={15} y={75} duration={28} />
+        <FloatingShape delay={8} size={120} color="amber" x={85} y={50} duration={35} />
+
+        <div
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{
+            background: `radial-gradient(ellipse at ${50 + mousePos.x * 10}% ${50 + mousePos.y * 10}%, rgba(99,102,241,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at ${50 - mousePos.x * 5}% ${50 - mousePos.y * 5}%, rgba(168,85,247,0.05) 0%, transparent 50%)`,
+          }}
+        />
+      </motion.div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 text-center lg:text-left"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-zinc-700/50 rounded-full bg-white/[0.02] backdrop-blur-sm"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              </span>
+              <span className="text-xs text-zinc-400 tracking-wide">Open to opportunities</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+            >
+              Hi, I&apos;m{' '}
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
+                Mohsin
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto lg:mx-0 mb-4 leading-relaxed"
+            >
+              CSE student · Full-stack developer · Researcher
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
+              className="text-sm text-zinc-500 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed"
+            >
+              I build web apps, mobile apps, games, and AI tools — with 6 research papers in ML, NLP, and CV.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="flex items-center gap-4 flex-wrap justify-center lg:justify-start"
+            >
+              <Link
+                href="/projects"
+                className="group relative px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20"
+              >
+                <span className="relative z-10">Explore my work</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </Link>
+
+              <a
+                href="mailto:mohsinibnahossain@gmail.com"
+                className="group px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-all duration-300"
+              >
+                Get in touch
+              </a>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative flex justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="flex items-center gap-8 mt-12 justify-center lg:justify-start"
             >
-              <div ref={imageRef} className="relative w-80 h-80 md:w-[28rem] md:h-[28rem]" style={{ perspective: '1000px' }}>
-                <motion.div
-                  className="absolute inset-0 rounded-full border border-blue-500/20"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
-                  style={{ transformStyle: 'preserve-3d' }}
+              {[
+                { href: 'https://github.com/MIHMahmudEli', label: 'GitHub', hoverColor: 'hover:text-white' },
+                { href: 'https://linkedin.com/in/mihmahmudeli', label: 'LinkedIn', hoverColor: 'hover:text-blue-400' },
+                { href: 'https://instagram.com/mihmahmudeli2002', label: 'Instagram', hoverColor: 'hover:text-pink-400' },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-xs text-zinc-600 ${link.hoverColor} transition-colors tracking-wider uppercase`}
                 >
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_20px_rgba(96,165,250,0.8)]" />
-                </motion.div>
-                <motion.div
-                  className="absolute inset-4 rounded-full border border-purple-500/20"
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                >
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.8)]" />
-                </motion.div>
-                <motion.div
-                  className="absolute inset-8 rounded-full border border-emerald-500/15"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
-                >
-                  <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_20px_rgba(52,211,153,0.8)]" />
-                </motion.div>
-
-                <motion.div
-                  className="relative w-full h-full"
-                  style={{
-                    transformStyle: 'preserve-3d',
-                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-                    transition: 'transform 0.1s ease-out',
-                  }}
-                >
-                  <div className="relative w-full h-full" style={{ transform: 'translateZ(30px)' }}>
-                    <div className="absolute inset-0 rounded-[3rem] overflow-hidden border border-zinc-700 shadow-2xl">
-                      <Image src="/mohsin-photo.png" alt="Mohsin" fill className="object-cover" priority />
-                    </div>
-                  </div>
-
-                  <div className="absolute -bottom-2 -right-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
-                    <div className="text-2xl font-bold text-white">41+</div>
-                    <div className="text-xs text-zinc-400">GitHub Repos</div>
-                  </div>
-                  <div className="absolute -top-2 -left-4 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-5 py-3 shadow-xl" style={{ transform: 'translateZ(50px)' }}>
-                    <div className="text-2xl font-bold text-white">6</div>
-                    <div className="text-xs text-zinc-400">Research Papers</div>
-                  </div>
-
-                  {[
-                    { color: '#3b82f6', left: '25%', top: '30%', dur: 2.5 },
-                    { color: '#8b5cf6', left: '70%', top: '25%', dur: 3 },
-                    { color: '#10b981', left: '75%', top: '65%', dur: 2 },
-                    { color: '#f59e0b', left: '30%', top: '70%', dur: 3.5 },
-                    { color: '#ef4444', left: '55%', top: '20%', dur: 2.8 },
-                    { color: '#ec4899', left: '65%', top: '75%', dur: 2.2 },
-                  ].map((p, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1.5 h-1.5 rounded-full"
-                      style={{
-                        backgroundColor: p.color,
-                        left: p.left,
-                        top: p.top,
-                        transform: 'translateZ(60px)',
-                      }}
-                      animate={{ y: [0, -15, 0], opacity: [0.6, 1, 0.6] }}
-                      transition={{ repeat: Infinity, duration: p.dur, delay: i * 0.3 }}
-                    />
-                  ))}
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="flex flex-col items-center gap-2">
-            <span className="text-xs text-zinc-600 tracking-wider">SCROLL</span>
-            <svg className="w-4 h-4 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section className="py-32 bg-zinc-950">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span className="text-xs font-semibold tracking-[0.2em] text-blue-400 uppercase">About</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mt-3 mb-8">Building at the intersection of code, research & creativity</h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              <p className="text-zinc-400 leading-relaxed text-lg">
-                I&apos;m a CSE student at American International University-Bangladesh with a deep passion for 
-                full-stack development, mobile apps, game development, and ML research. I&apos;ve built platforms 
-                used by hundreds of students and I&apos;m actively working on 6 research papers spanning AI text 
-                detection, 5G networks, NLP, and computer vision.
-              </p>
-              <div className="space-y-6">
-                {[
-                  { label: 'Email', value: 'mohsinibnahossain@gmail.com' },
-                  { label: 'Location', value: 'Bangladesh' },
-                  { label: 'Instagram', value: '@mihmahmudeli2002 — Photography' },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    <span className="text-xs font-medium text-zinc-500 w-24 shrink-0 pt-0.5">{item.label}</span>
-                    <span className="text-sm text-zinc-300">{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="mt-24">
-            <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm font-semibold tracking-[0.2em] text-zinc-500 uppercase mb-8">Tech Stack</motion.h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {skills.map((s, i) => (
-                <motion.div
-                  key={s.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="group relative p-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style={{ backgroundColor: s.color + '20', color: s.color }}>{s.icon}</div>
-                    <span className="text-sm font-medium text-white">{s.name}</span>
-                  </div>
-                  <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${s.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.2 + i * 0.05 }}
-                      className="h-full rounded-full"
-                      style={{ backgroundColor: s.color }}
-                    />
-                  </div>
-                </motion.div>
+                  {link.label}
+                </a>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-32 bg-black">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-end justify-between mb-16">
-            <div>
-              <span className="text-xs font-semibold tracking-[0.2em] text-blue-400 uppercase">Projects</span>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mt-3">Featured Work</h2>
-            </div>
-            <Link href="/projects" className="hidden md:flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors">
-              View All <span>&rarr;</span>
-            </Link>
+            </motion.div>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map((p, i) => (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative shrink-0"
+          >
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 animate-pulse-slow blur-3xl" />
+
               <motion.div
-                key={p.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                className="absolute inset-0 rounded-full border border-zinc-700/50"
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
               >
-                <Link
-                  href={`/projects/${p.slug}`}
-                  className="group block p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:bg-zinc-900 transition-all h-full"
+                {[0, 60, 120, 180, 240, 300].map((deg) => (
+                  <div
+                    key={deg}
+                    className="absolute w-2 h-2 rounded-full bg-blue-400/60 shadow-[0_0_12px_rgba(96,165,250,0.4)]"
+                    style={{
+                      top: '50%',
+                      left: '50%',
+                      transform: `rotate(${deg}deg) translateY(-50%) translateX(-50%) rotate(${deg}deg)`,
+                      transformOrigin: '0 0',
+                    }}
+                  />
+                ))}
+              </motion.div>
+
+              <motion.div
+                className="absolute inset-4 rounded-full border border-zinc-700/30"
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, duration: 40, ease: 'linear' }}
+              />
+
+              <div className="absolute inset-8 rounded-full overflow-hidden border border-zinc-700/50 shadow-2xl">
+                <Image src="/mohsin-photo.png" alt="Mohsin Mahmud Eli" fill className="object-cover" priority />
+              </div>
+
+              <motion.div
+                className="absolute -bottom-2 -right-2 bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-4 py-2.5 shadow-xl"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                <div className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">41+</div>
+                <div className="text-[10px] text-zinc-500 tracking-wide">Repositories</div>
+              </motion.div>
+
+              <motion.div
+                className="absolute -top-2 -left-2 bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-4 py-2.5 shadow-xl"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+              >
+                <div className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">6</div>
+                <div className="text-[10px] text-zinc-500 tracking-wide">Papers</div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }} className="flex flex-col items-center gap-2">
+          <span className="text-[10px] text-zinc-700 tracking-[0.3em]">SCROLL</span>
+          <svg className="w-3.5 h-3.5 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+function FadeInUp({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function AboutSection() {
+  const highlights = [
+    { label: 'Focus', value: 'Full-stack development, ML research, and system design' },
+    { label: 'Experience', value: 'Built platforms used by hundreds of students and professionals' },
+    { label: 'Research', value: '6 papers in AI, NLP, CV, and telecommunications' },
+  ];
+
+  return (
+    <section className="py-28 relative">
+      <GridBackground />
+      <div className="max-w-6xl mx-auto px-6">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            Building at the intersection of{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">code, research, and creativity</span>
+          </h2>
+        </FadeInUp>
+
+        <FadeInUp delay={0.1}>
+          <p className="text-zinc-400 text-lg max-w-2xl mb-12 leading-relaxed">
+            CSE student at American International University-Bangladesh. I create full-stack applications, 
+            contribute to ML research, and build games — always exploring the edge where technology meets impact.
+          </p>
+        </FadeInUp>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {highlights.map((h, i) => (
+            <FadeInUp key={h.label} delay={0.1 + i * 0.1}>
+              <div className="group p-5 rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:bg-zinc-900/50 hover:border-zinc-700 transition-all duration-300">
+                <span className="text-[10px] tracking-[0.2em] text-zinc-500 uppercase mb-2 block">{h.label}</span>
+                <p className="text-sm text-zinc-300 leading-relaxed">{h.value}</p>
+              </div>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SkillsSection() {
+  const skills = [
+    { name: 'TypeScript', level: 85, color: '#3178c6' },
+    { name: 'JavaScript', level: 92, color: '#f1e05a' },
+    { name: 'React', level: 88, color: '#61dafb' },
+    { name: 'Next.js', level: 82, color: '#ffffff' },
+    { name: 'Python', level: 75, color: '#3572A5' },
+    { name: 'NestJS', level: 78, color: '#e0234e' },
+    { name: 'Kotlin', level: 70, color: '#A97BFF' },
+    { name: 'Tailwind', level: 85, color: '#06b6d4' },
+  ];
+
+  return (
+    <section className="py-28 bg-zinc-950/50 relative">
+      <div className="max-w-6xl mx-auto px-6">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12">
+            Tech Stack
+          </h2>
+        </FadeInUp>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {skills.map((s, i) => (
+            <FadeInUp key={s.name} delay={i * 0.03}>
+              <motion.div
+                className="relative p-4 rounded-xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 group"
+                whileHover={{ y: -2 }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold"
+                    style={{ backgroundColor: s.color + '20', color: s.color }}
+                  >
+                    {s.name.slice(0, 2)}
+                  </div>
+                  <span className="text-sm font-medium text-zinc-200">{s.name}</span>
+                </div>
+                <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${s.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-full rounded-full"
+                    style={{ backgroundColor: s.color }}
+                  />
+                </div>
+              </motion.div>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatsSection() {
+  const stats = [
+    { num: '41+', label: 'Repositories', gradient: 'from-blue-500 to-cyan-500' },
+    { num: '10+', label: 'Apps Built', gradient: 'from-purple-500 to-pink-500' },
+    { num: '6', label: 'Papers', gradient: 'from-emerald-500 to-teal-500' },
+    { num: '2', label: 'Launched', gradient: 'from-amber-500 to-orange-500' },
+  ];
+
+  return (
+    <section className="py-20 relative">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800/50 rounded-2xl overflow-hidden border border-zinc-800/50">
+          {stats.map((s, i) => (
+            <FadeInUp key={s.label} delay={i * 0.1}>
+              <div className="bg-zinc-950 p-8 text-center group hover:bg-zinc-900/80 transition-colors duration-300 h-full">
+                <div className={`text-3xl md:text-5xl font-bold mb-1 bg-gradient-to-r ${s.gradient} bg-clip-text text-transparent`}>{s.num}</div>
+                <div className="text-xs text-zinc-500 tracking-wide">{s.label}</div>
+              </div>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedSection() {
+  const items = [
+    {
+      title: 'Research',
+      description: '6 papers in AI/ML, NLP, CV, and telecommunications',
+      link: '/research',
+      gradient: 'from-emerald-500/10 to-teal-500/5',
+      border: 'border-emerald-500/20',
+      hoverBorder: 'group-hover:border-emerald-400/40',
+      accent: 'text-emerald-400',
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+      ),
+    },
+    {
+      title: 'Photography',
+      description: 'Capturing moments through the lens — Instagram: @mihmahmudeli2002',
+      link: '/photography',
+      gradient: 'from-amber-500/10 to-orange-500/5',
+      border: 'border-amber-500/20',
+      hoverBorder: 'group-hover:border-amber-400/40',
+      accent: 'text-amber-400',
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.16a15.53 15.53 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" /></svg>
+      ),
+    },
+    {
+      title: 'Games',
+      description: 'Tic-tac-toe AI, counting game, ludo — built for fun and learning',
+      link: '/games',
+      gradient: 'from-purple-500/10 to-pink-500/5',
+      border: 'border-purple-500/20',
+      hoverBorder: 'group-hover:border-purple-400/40',
+      accent: 'text-purple-400',
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.007-1.875 2.25-1.875s2.25.84 2.25 1.875c0 .369-.128.713-.349 1.003-.215.283-.401.604-.401.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.959.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.64.64 0 01-.657-.643l.001-.001z" /></svg>
+      ),
+    },
+  ];
+
+  return (
+    <section className="py-28 bg-zinc-950/50 relative">
+      <div className="max-w-6xl mx-auto px-6">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Explore more</h2>
+        </FadeInUp>
+        <FadeInUp delay={0.1}>
+          <p className="text-zinc-400 text-lg mb-12 max-w-xl">Beyond code — research, photography, and game development.</p>
+        </FadeInUp>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {items.map((item, i) => (
+            <FadeInUp key={item.title} delay={0.1 + i * 0.1}>
+              <Link href={item.link} className={`group block p-6 rounded-2xl border ${item.border} ${item.hoverBorder} bg-gradient-to-br ${item.gradient} transition-all duration-300 h-full`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${item.accent} bg-white/5 group-hover:bg-white/10 transition-colors`}>
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:translate-x-0.5 transition-transform">{item.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-5">{item.description}</p>
+                <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${item.accent} group-hover:gap-2.5 transition-all`}>
+                  Learn more <span className="text-sm">&rarr;</span>
+                </span>
+              </Link>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectsPreviewSection() {
+  const projects = [
+    { title: 'StudyHub', desc: 'Academic note-sharing platform with moderation & gamification', slug: 'studyhub', color: '#6366f1' },
+    { title: 'RoutinePro', desc: 'Smart class routine generator with conflict-free scheduling', slug: 'routinepro', color: '#ec4899' },
+    { title: 'TrueNetMeter', desc: 'Premium internet speed test with circular speedometer', slug: 'truenetmeter', color: '#f59e0b' },
+    { title: 'Automata Playground', desc: 'Interactive visualization tool for automata theory', slug: 'automata-playground', color: '#10b981' },
+    { title: 'Tic-Tac-Toe AI', desc: 'Alpha-beta pruning algorithm — computer always wins', slug: 'tic-tac-toe', color: '#8b5cf6' },
+    { title: 'Counting Game', desc: 'Number game against a smart computer opponent', slug: 'counting-game', color: '#ef4444' },
+  ];
+
+  return (
+    <section className="py-28 relative">
+      <div className="max-w-6xl mx-auto px-6">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Projects</h2>
+        </FadeInUp>
+        <FadeInUp delay={0.1}>
+          <p className="text-zinc-400 text-lg mb-12 max-w-xl">Selected works across web, mobile, and game development.</p>
+        </FadeInUp>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.map((p, i) => (
+            <FadeInUp key={p.slug} delay={i * 0.05}>
+              <Link
+                href={`/projects/${p.slug}`}
+                className="group block p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800 hover:border-zinc-700 transition-all duration-300 h-full relative overflow-hidden"
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${p.color}08, transparent 40%)` }} />
+                <div
+                  className="relative w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-base font-bold transition-all group-hover:scale-110 group-hover:shadow-lg"
+                  style={{ backgroundColor: p.color + '20', color: p.color, boxShadow: `0 0 0 0 ${p.color}00` }}
                 >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-lg font-bold transition-colors" style={{ backgroundColor: p.color + '20', color: p.color }}>
-                    {p.title[0]}
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">{p.title}</h3>
-                  <p className="text-sm text-zinc-400 mb-4 leading-relaxed">{p.desc}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.tech.map((t) => (
-                      <span key={t} className="text-[10px] px-2 py-0.5 bg-zinc-800 text-zinc-500 rounded-full">{t}</span>
-                    ))}
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                  {p.title[0]}
+                </div>
+                <h3 className="relative text-base font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">{p.title}</h3>
+                <p className="relative text-sm text-zinc-400 leading-relaxed">{p.desc}</p>
+              </Link>
+            </FadeInUp>
+          ))}
+        </div>
 
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10 text-center md:hidden">
-            <Link href="/projects" className="inline-flex px-6 py-3 border border-zinc-700 text-zinc-300 rounded-full text-sm hover:bg-zinc-900 transition-all">
-              View All Projects &rarr;
+        <FadeInUp delay={0.3}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-zinc-300 rounded-full text-sm hover:bg-zinc-800 hover:border-zinc-500 transition-all"
+            >
+              View all projects <span>&rarr;</span>
             </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-zinc-950 border-y border-zinc-900">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { num: '41+', label: 'GitHub Repos', desc: 'Public repositories' },
-              { num: '10+', label: 'Apps Built', desc: 'Web, mobile & desktop' },
-              { num: '6', label: 'Research Papers', desc: 'ML, NLP, CV, Telecom' },
-              { num: '2', label: 'Apps Launched', desc: 'Production deployments' },
-            ].map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl font-bold text-white mb-1">{s.num}</div>
-                <div className="text-sm font-medium text-zinc-300">{s.label}</div>
-                <div className="text-xs text-zinc-600 mt-1">{s.desc}</div>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </section>
+        </FadeInUp>
+      </div>
+    </section>
+  );
+}
 
-      <section className="py-32 bg-black">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <span className="text-xs font-semibold tracking-[0.2em] text-green-400 uppercase">Play</span>
-              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Games</h3>
-              <p className="text-zinc-400 text-sm mb-6">From alpha-beta pruning to game engines.</p>
-              <div className="space-y-3 mb-6">
-                {[
-                  { title: 'Tic-Tac-Toe (Alpha-Beta)', desc: 'AI that always wins' },
-                  { title: 'Counting Game', desc: 'Game theory strategy' },
-                  { title: 'Ludo Game App', desc: 'React Native game engine' },
-                ].map((g) => (
-                  <div key={g.title} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800">
-                    <h4 className="text-sm font-medium text-white">{g.title}</h4>
-                    <p className="text-xs text-zinc-500 mt-1">{g.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/games" className="inline-flex text-sm text-green-400 hover:text-green-300 transition-colors">
-                View All Games &rarr;
-              </Link>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <span className="text-xs font-semibold tracking-[0.2em] text-yellow-400 uppercase">Research</span>
-              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Papers</h3>
-              <p className="text-zinc-400 text-sm mb-6">6 papers across AI, ML, NLP, and CV.</p>
-              <div className="space-y-3 mb-6">
-                {[
-                  { title: 'PIRD — AI Text Detection', field: 'NLP / AI' },
-                  { title: '5G Network Traffic Prediction', field: 'Telecom / ML' },
-                  { title: 'Food Price Volatility', field: 'Data Science' },
-                ].map((r) => (
-                  <div key={r.title} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800">
-                    <h4 className="text-sm font-medium text-white">{r.title}</h4>
-                    <p className="text-xs text-zinc-500 mt-1">{r.field}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/research" className="inline-flex text-sm text-yellow-400 hover:text-yellow-300 transition-colors">
-                View All Research &rarr;
-              </Link>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <span className="text-xs font-semibold tracking-[0.2em] text-amber-400 uppercase">Photography</span>
-              <h3 className="text-2xl font-bold text-white mt-2 mb-4">Lens</h3>
-              <p className="text-zinc-400 text-sm mb-6">Capturing moments through the lens.</p>
-              <div className="space-y-3 mb-6">
-                {[
-                  { title: 'Instagram', desc: '@mihmahmudeli2002' },
-                  { title: 'Nature & Landscape', desc: 'Documentary style' },
-                  { title: 'Street Photography', desc: 'Urban stories' },
-                ].map((g) => (
-                  <div key={g.title} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800">
-                    <h4 className="text-sm font-medium text-white">{g.title}</h4>
-                    <p className="text-xs text-zinc-500 mt-1">{g.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/photography" className="inline-flex text-sm text-amber-400 hover:text-amber-300 transition-colors">
-                View Gallery &rarr;
-              </Link>
-            </motion.div>
+function ContactSection() {
+  return (
+    <section className="py-28 bg-zinc-950/50 relative border-t border-zinc-800/50">
+      <GridBackground />
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            Let&apos;s work together
+          </h2>
+        </FadeInUp>
+        <FadeInUp delay={0.1}>
+          <p className="text-zinc-400 text-lg mb-10 max-w-md mx-auto">
+            Open to collaborations, research discussions, or just a conversation about tech.
+          </p>
+        </FadeInUp>
+        <FadeInUp delay={0.2}>
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <a
+              href="mailto:mohsinibnahossain@gmail.com"
+              className="px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-lg hover:shadow-white/20"
+            >
+              Send an email
+            </a>
+            <a
+              href="https://github.com/MIHMahmudEli"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-all"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://instagram.com/mihmahmudeli2002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-all"
+            >
+              Instagram
+            </a>
           </div>
-        </div>
-      </section>
+        </FadeInUp>
+      </div>
+    </section>
+  );
+}
 
-      <section className="py-20 bg-zinc-950">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase">Connect</span>
-            <h2 className="text-2xl md:text-4xl font-bold text-white mt-3 mb-6">Let&apos;s Work Together</h2>
-            <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-              Open to collaborations, research discussions, or just a conversation about tech.
-            </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a href="mailto:mohsinibnahossain@gmail.com" className="px-8 py-3.5 bg-white text-black rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all">
-                Email Me
-              </a>
-              <a href="https://github.com/MIHMahmudEli" target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-900 transition-all">
-                GitHub
-              </a>
-              <a href="https://instagram.com/mihmahmudeli2002" target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-900 transition-all">
-                Instagram
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+export default function Home() {
+  return (
+    <>
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-black to-purple-950/20 pointer-events-none" />
+
+      <HeroSection />
+      <AboutSection />
+      <StatsSection />
+      <SkillsSection />
+      <FeaturedSection />
+      <ProjectsPreviewSection />
+      <ContactSection />
     </>
   );
 }
