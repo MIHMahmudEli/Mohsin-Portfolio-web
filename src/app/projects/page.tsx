@@ -44,21 +44,10 @@ const categories = ['All', 'Web', 'Mobile', 'Game', 'Tool'] as const;
 type Category = typeof categories[number];
 
 const techColors: Record<string, string> = {
-  TypeScript: '#3178c6',
-  JavaScript: '#f1e05a',
-  Python: '#3572A5',
-  Kotlin: '#A97BFF',
-  PHP: '#4F5B93',
-  'C++': '#f34b7d',
-  Java: '#b07219',
-  'C#': '#178600',
-  MySQL: '#00758F',
-  React: '#61dafb',
-  'Next.js': '#ffffff',
-  PostgreSQL: '#336791',
-  OpenGL: '#5586a4',
-  HTML: '#e34c26',
-  CSS: '#563d7c',
+  TypeScript: '#3178c6', JavaScript: '#f1e05a', Python: '#3572A5', Kotlin: '#A97BFF',
+  PHP: '#4F5B93', 'C++': '#f34b7d', Java: '#b07219', 'C#': '#178600',
+  MySQL: '#00758F', React: '#61dafb', 'Next.js': '#ffffff', PostgreSQL: '#336791',
+  OpenGL: '#5586a4', HTML: '#e34c26', CSS: '#563d7c',
 };
 
 function categoryAccent(cat: Category): string {
@@ -71,20 +60,18 @@ function categoryAccent(cat: Category): string {
   }
 }
 
-function categoryGlow(cat: string): string {
-  switch (cat) {
-    case 'Web': return 'rgba(59,130,246,0.04)';
-    case 'Mobile': return 'rgba(168,85,247,0.04)';
-    case 'Game': return 'rgba(52,211,153,0.04)';
-    case 'Tool': return 'rgba(245,158,11,0.04)';
-    default: return 'transparent';
-  }
-}
-
 export default function ProjectsPage() {
   const [activeTab, setActiveTab] = useState<Category>('All');
+  const [prevTab, setPrevTab] = useState<Category>('All');
 
   const filtered = activeTab === 'All' ? projects : projects.filter(p => p.category === activeTab);
+
+  const handleTabChange = (cat: Category) => {
+    setPrevTab(activeTab);
+    setActiveTab(cat);
+  };
+
+  const titleWords = ["Things", "I've", "built"];
 
   return (
     <>
@@ -92,23 +79,52 @@ export default function ProjectsPage() {
 
       <div className="relative py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10 md:mb-14">
-            <span className="text-xs tracking-[0.2em] text-zinc-500 uppercase mb-3 block">Portfolio</span>
+          <div className="mb-10 md:mb-14">
+            <motion.span
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-xs tracking-[0.2em] text-zinc-500 uppercase mb-3 block"
+            >
+              Portfolio
+            </motion.span>
+
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 leading-tight">
-              Things I&apos;ve{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">built</span>
+              {titleWords.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block mr-3"
+                >
+                  {word === 'built' ? (
+                    <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
+                      built
+                    </span>
+                  ) : (
+                    word
+                  )}
+                </motion.span>
+              ))}
             </h1>
-            <p className="text-zinc-400 text-base max-w-xl">
-              {projects.length} projects across web, mobile, games, and tools — each one taught me something new.
-            </p>
-          </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-zinc-400 text-base max-w-xl"
+            >
+              {projects.length} projects across web, mobile, games, and tools &mdash; each one taught me something new.
+            </motion.p>
+          </div>
 
           <div className="flex items-center gap-1 mb-10 border-b border-zinc-800/50">
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveTab(cat)}
-                className={`relative px-4 py-3 text-xs font-medium transition-colors ${
+                onClick={() => handleTabChange(cat)}
+                className={`relative px-4 py-3 text-xs font-medium transition-colors duration-200 ${
                   activeTab === cat ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'
                 }`}
               >
@@ -117,105 +133,160 @@ export default function ProjectsPage() {
                   <motion.div
                     layoutId="tab-underline"
                     className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r ${categoryAccent(cat)}`}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                   />
                 )}
               </button>
             ))}
-            <span className="ml-auto text-[10px] text-zinc-600 tracking-wider">{filtered.length} projects</span>
+            <motion.span
+              key={activeTab + filtered.length}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="ml-auto text-[10px] text-zinc-600 tracking-wider"
+            >
+              {filtered.length} projects
+            </motion.span>
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
-              {filtered.map((p) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((p, i) => {
                 const primaryTech = p.tech[0];
                 const accentColor = techColors[primaryTech] || '#6366f1';
 
                 return (
-                  <Link
+                  <motion.div
                     key={p.slug}
-                    href={`/projects/${p.slug}`}
-                    className="group relative rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-600/50 transition-all duration-300 overflow-hidden"
-                    style={{ perspective: '600px' }}
+                    layout
+                    initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -16, scale: 0.96 }}
+                    transition={{
+                      opacity: { duration: 0.35 },
+                      y: { type: 'spring', stiffness: 250, damping: 25, delay: i * 0.04 },
+                      scale: { duration: 0.35 },
+                      layout: { type: 'spring', stiffness: 250, damping: 25 },
+                    }}
                   >
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(500px circle at 30% 20%, ${accentColor}12, transparent 60%)`,
-                      }}
-                    />
+                    <Link
+                      href={`/projects/${p.slug}`}
+                      className="group relative block rounded-2xl bg-zinc-900/40 border border-zinc-800 transition-all duration-300 overflow-hidden"
+                      style={{ perspective: '600px' }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100"
+                        style={{
+                          background: `radial-gradient(500px circle at 30% 20%, ${accentColor}15, transparent 60%)`,
+                        }}
+                        transition={{ duration: 0.4 }}
+                      />
 
-                    <div
-                      className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity"
-                      style={{ background: `linear-gradient(90deg, ${accentColor}40, ${accentColor}, ${accentColor}40)` }}
-                    />
+                      <div
+                        className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: `linear-gradient(90deg, ${accentColor}40, ${accentColor}, ${accentColor}40)` }}
+                      />
 
-                    <div className="relative p-5">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="w-10 h-10 rounded-xl flex items-center justify-center text-lg transition-transform group-hover:scale-110 group-hover:-translate-y-0.5"
-                            style={{ backgroundColor: `${accentColor}18` }}
+                      <motion.div
+                        className="relative p-5"
+                        whileHover={{ y: -2 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <motion.div
+                            className="flex items-center gap-3"
+                            whileHover={{ x: 2 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                           >
-                            {p.emoji}
+                            <motion.div
+                              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
+                              style={{ backgroundColor: `${accentColor}18` }}
+                              whileHover={{ scale: 1.15, rotate: -8 }}
+                              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                            >
+                              {p.emoji}
+                            </motion.div>
+                          </motion.div>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {p.liveUrl && (
+                              <motion.span
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 + i * 0.04 }}
+                                className="flex items-center gap-1.5 text-[10px] text-emerald-400/70"
+                              >
+                                <span className="relative flex h-1.5 w-1.5">
+                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                                </span>
+                                Live
+                              </motion.span>
+                            )}
+                            {p.year && (
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 border border-zinc-700/50">{p.year}</span>
+                            )}
                           </div>
                         </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          {p.liveUrl && (
-                            <span className="flex items-center gap-1.5 text-[10px] text-emerald-400/70">
-                              <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-                              </span>
-                              Live
-                            </span>
-                          )}
-                          {p.year && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 border border-zinc-700/50">{p.year}</span>
-                          )}
-                        </div>
-                      </div>
 
-                      <h3 className="text-sm font-semibold text-white mb-1.5 group-hover:text-blue-300 transition-colors">{p.title}</h3>
-                      <p className="text-xs text-zinc-500 leading-relaxed mb-4 line-clamp-2 group-hover:text-zinc-400 transition-colors">{p.desc}</p>
+                        <h3 className="text-sm font-semibold text-white mb-1.5 group-hover:text-blue-300 transition-colors duration-200">{p.title}</h3>
+                        <p className="text-xs text-zinc-500 leading-relaxed mb-4 line-clamp-2 group-hover:text-zinc-400 transition-colors duration-200">{p.desc}</p>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-1.5">
-                          {p.tech.map((t) => (
-                            <span
-                              key={t}
-                              className="text-[9px] px-2 py-0.5 rounded-full border font-medium transition-colors"
-                              style={{
-                                backgroundColor: `${techColors[t] || '#6366f1'}15`,
-                                color: techColors[t] || '#6366f1',
-                                borderColor: `${techColors[t] || '#6366f1'}25`,
-                              }}
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-wrap gap-1.5">
+                            {p.tech.map((t, ti) => (
+                              <motion.span
+                                key={t}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 + i * 0.04 + ti * 0.06 }}
+                                className="text-[9px] px-2 py-0.5 rounded-full border font-medium transition-all duration-200"
+                                style={{
+                                  backgroundColor: `${techColors[t] || '#6366f1'}15`,
+                                  color: techColors[t] || '#6366f1',
+                                  borderColor: `${techColors[t] || '#6366f1'}25`,
+                                }}
+                                whileHover={{ y: -2, scale: 1.05 }}
+                              >
+                                {t}
+                              </motion.span>
+                            ))}
+                          </div>
+                          <motion.div
+                            className="w-7 h-7 rounded-full bg-white/[0.03] border border-white/[0.06] flex items-center justify-center shrink-0 ml-3"
+                            initial={{ opacity: 0, x: -8 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.35 + i * 0.04 }}
+                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(59,130,246,0.1)', borderColor: 'rgba(59,130,246,0.2)' }}
+                          >
+                            <motion.svg
+                              className="w-3 h-3 text-zinc-500"
+                              fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                              whileHover={{ x: 2, color: '#60a5fa' }}
+                              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             >
-                              {t}
-                            </span>
-                          ))}
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </motion.svg>
+                          </motion.div>
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-white/[0.03] border border-white/[0.06] flex items-center justify-center shrink-0 ml-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-blue-500/10 group-hover:border-blue-500/20 group-hover:-translate-y-0.5">
-                          <svg className="w-3 h-3 text-zinc-600 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                      </motion.div>
+                    </Link>
+                  </motion.div>
                 );
               })}
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
 
-          {filtered.length === 0 && (
-            <div className="text-center py-20 text-zinc-600 text-sm">No projects in this category yet.</div>
-          )}
+          <AnimatePresence>
+            {filtered.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="text-center py-20 text-zinc-600 text-sm"
+              >
+                No projects in this category yet.
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </>
