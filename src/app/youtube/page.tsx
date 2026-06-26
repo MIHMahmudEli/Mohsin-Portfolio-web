@@ -65,7 +65,7 @@ export default function YouTubePage() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-red-950/20 via-black to-rose-950/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-red-950/20 via-surface to-rose-950/20 pointer-events-none" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-red-500/10 blur-[120px] floating-shape" style={{ animationDuration: '28s' }} />

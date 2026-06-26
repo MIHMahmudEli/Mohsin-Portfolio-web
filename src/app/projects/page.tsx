@@ -75,7 +75,7 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-black to-purple-950/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-surface to-purple-950/20 pointer-events-none" />
 
       <div className="relative py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6">

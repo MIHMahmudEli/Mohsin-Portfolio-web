@@ -57,7 +57,7 @@ export default function GamesPage() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-emerald-950/20 via-black to-blue-950/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-emerald-950/20 via-surface to-blue-950/20 pointer-events-none" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-emerald-500/10 blur-[120px] floating-shape" style={{ animationDelay: '0s', animationDuration: '30s' }} />

@@ -522,7 +522,7 @@ function ContactSection() {
 export default function Home() {
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-black to-purple-950/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-surface to-purple-950/20 pointer-events-none" />
 
       <HeroSection />
       <AboutSection />

@@ -30,7 +30,7 @@ export default function PhotographyPage() {
   return (
     <>
       <div className="relative min-h-screen">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-black to-black pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-surface to-surface pointer-events-none" />
 
         <section className="relative pt-32 pb-16 md:pt-40 md:pb-20">
           <div className="max-w-6xl mx-auto px-6">

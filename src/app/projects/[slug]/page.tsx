@@ -311,7 +311,7 @@ export default function ProjectDetail() {
   if (!project || !project.features) {
     return (
       <div className="relative py-32 text-center">
-        <div className="fixed inset-0 bg-gradient-to-br from-blue-950/40 via-black to-purple-950/40 pointer-events-none" />
+        <div className="fixed inset-0 bg-gradient-to-br from-blue-950/40 via-surface to-purple-950/40 pointer-events-none" />
         <div className="relative">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-7xl mb-4 opacity-20 font-bold text-content">404</motion.div>
           <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl font-bold text-content mb-4">Project not found</motion.h1>
@@ -334,7 +334,7 @@ export default function ProjectDetail() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-black to-purple-950/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-surface to-purple-950/20 pointer-events-none" />
 
       <div className="relative">
         <div className={`absolute inset-0 bg-gradient-to-b ${getCategoryGradient(project.category)} pointer-events-none`} />

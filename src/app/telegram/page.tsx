@@ -67,7 +67,7 @@ function SectionDivider({ label }: { label: string }) {
 export default function TelegramPage() {
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-sky-950/30 via-black to-blue-950/30 pointer-events-none" />
+      <div className="fixed inset-0 bg-gradient-to-br from-sky-950/30 via-surface to-blue-950/30 pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.06),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.06),transparent_50%)] pointer-events-none" />
       <div className="relative">
         <section className="relative min-h-[85vh] flex items-center overflow-hidden">
