@@ -78,6 +78,18 @@ body {
   animation: scroll-bounce 2s ease-in-out infinite;
 }
 
+@keyframes emoji-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-2deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-2px) rotate(2deg); }
+}
+
+.emoji-bob {
+  animation: emoji-bob 4s ease-in-out infinite;
+  will-change: transform;
+}
+
 .will-change-transform {
   will-change: transform;
 }
