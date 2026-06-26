@@ -242,7 +242,7 @@ function AboutSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {highlights.map((h, i) => (
             <FadeInUp key={h.label} delay={0.1 + i * 0.1}>
-              <div className="p-5 rounded-2xl border border-line bg-card/30 hover:bg-card/50 hover:border-line transition-colors">
+              <div className="p-5 rounded-2xl border border-line bg-card/50 hover:bg-card/70 hover:border-line transition-colors">
                 <span className="text-[10px] tracking-[0.2em] text-muted uppercase mb-2 block">{h.label}</span>
                 <p className="text-sm text-content leading-relaxed">{h.value}</p>
               </div>
@@ -276,7 +276,7 @@ function SkillsSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {skills.map((s, i) => (
             <FadeInUp key={s.name} delay={i * 0.03}>
-              <div className="p-4 rounded-xl bg-card/40 border border-line hover:border-line transition-colors">
+              <div className="p-4 rounded-xl bg-card/60 border border-line hover:border-line transition-colors">
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold"
@@ -427,7 +427,7 @@ function ProjectsPreviewSection() {
             <FadeInUp key={p.slug} delay={i * 0.05}>
               <Link
                 href={`/projects/${p.slug}`}
-                className="group block p-5 rounded-2xl bg-card/30 border border-line hover:border-line transition-colors h-full"
+                className="group block p-5 rounded-2xl bg-card/50 border border-line hover:border-line transition-colors h-full"
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-base font-bold transition-transform group-hover:scale-110"

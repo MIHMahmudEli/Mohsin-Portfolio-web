@@ -129,7 +129,7 @@ export default function GamesPage() {
                 >
                   <div
                     className={`group relative rounded-2xl border border-line overflow-hidden h-full transition-shadow duration-300 ${
-                      g.featured ? 'bg-card/50' : 'bg-card/30'
+                      g.featured ? 'bg-card/70' : 'bg-card/50'
                     }`}
                     style={{
                       transformStyle: 'preserve-3d',
@@ -153,7 +153,7 @@ export default function GamesPage() {
                     <div className="relative p-5 flex flex-col h-full">
                       <div className="flex items-start justify-between mb-4">
                         <motion.div
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl bg-card/60 border border-line/50 emoji-bob"
+                          className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl bg-card/80 border border-line/50 emoji-bob"
                           style={{ animationDelay: `${i * 0.2}s` }}
                           whileHover={{ scale: 1.15, rotate: -12 }}
                           transition={{ type: 'spring', stiffness: 250, damping: 12 }}
@@ -260,7 +260,7 @@ export default function GamesPage() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 p-6 rounded-2xl border border-line bg-card/30 flex items-center justify-between flex-wrap gap-4 relative overflow-hidden group"
+            className="mt-12 p-6 rounded-2xl border border-line bg-card/50 flex items-center justify-between flex-wrap gap-4 relative overflow-hidden group"
             whileHover={{ y: -2 }}
           >
             <motion.div

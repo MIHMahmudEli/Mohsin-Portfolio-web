@@ -502,7 +502,7 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl border border-line bg-card/30 p-6 md:p-8 mb-14"
+            className="rounded-2xl border border-line bg-card/50 p-6 md:p-8 mb-14"
           >
             <h3 className="text-sm font-semibold text-content mb-6 flex items-center gap-2">
               <span>✨</span> Key Features
@@ -515,7 +515,7 @@ export default function ProjectDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-card/30 border border-line hover:bg-card/50 hover:border-line transition-colors"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-card/50 border border-line hover:bg-card/70 hover:border-line transition-colors"
                 >
                   <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
                     <svg className="w-3 h-3 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>

@@ -170,7 +170,7 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${p.slug}`}
-                      className="group relative block rounded-2xl bg-card/40 border border-line transition-all duration-300 overflow-hidden"
+                      className="group relative block rounded-2xl bg-card/60 border border-line transition-all duration-300 overflow-hidden"
                       style={{ perspective: '600px' }}
                     >
                       <motion.div

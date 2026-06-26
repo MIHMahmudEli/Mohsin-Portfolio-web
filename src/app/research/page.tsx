@@ -164,7 +164,7 @@ export default function ResearchPage() {
                   style={{ perspective: '800px' }}
                 >
                   <div
-                    className="group relative rounded-2xl border border-line overflow-hidden h-full bg-card/40 transition-shadow duration-300"
+                    className="group relative rounded-2xl border border-line overflow-hidden h-full bg-card/60 transition-shadow duration-300"
                     style={{ transformStyle: 'preserve-3d' }}
                     onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px -12px rgba(59,130,246,0.12)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 0 0 transparent'; }}
@@ -262,7 +262,7 @@ export default function ResearchPage() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 p-6 rounded-2xl border border-line bg-card/30 relative overflow-hidden group"
+            className="mt-12 p-6 rounded-2xl border border-line bg-card/50 relative overflow-hidden group"
           >
             <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative flex items-center gap-4 flex-wrap">

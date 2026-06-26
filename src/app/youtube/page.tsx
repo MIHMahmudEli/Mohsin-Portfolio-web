@@ -253,7 +253,7 @@ export default function YouTubePage() {
                     exit={{ opacity: 0, scale: 0.92, y: -10 }}
                     transition={{ type: 'spring', stiffness: 160, damping: 20, delay: i * 0.05 }}
                     onClick={() => setActiveVideo(video.id)}
-                    className="group relative text-left rounded-xl overflow-hidden border border-line bg-card/40 hover:border-line transition-all"
+                    className="group relative text-left rounded-xl overflow-hidden border border-line bg-card/60 hover:border-line transition-all"
                     whileHover={{ y: -4 }}
                   >
                     <div className="relative aspect-video bg-card overflow-hidden">
