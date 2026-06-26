@@ -77,7 +77,7 @@ export default function YouTubePage() {
         <section className="relative min-h-[70vh] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <Image src="/logos/yt cover.png" alt="" fill className="object-cover opacity-15" priority />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface/85 via-surface/90 to-surface" />
           </div>
           <div className="relative z-10 max-w-5xl mx-auto px-6 w-full py-20">
             <motion.span

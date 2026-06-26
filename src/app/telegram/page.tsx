@@ -71,7 +71,7 @@ export default function TelegramPage() {
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.06),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.06),transparent_50%)] pointer-events-none" />
       <div className="relative">
         <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-surface/80" />
           <div className="absolute top-20 right-48 w-72 h-72 bg-sky-500/10 rounded-full blur-[120px] animate-pulse" />
           <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/8 rounded-full blur-[140px]" />
           <div className="absolute top-1/3 left-1/2 w-56 h-56 bg-cyan-500/8 rounded-full blur-[100px]" />
