@@ -84,12 +84,12 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="text-xs tracking-[0.2em] text-zinc-500 uppercase mb-3 block"
+              className="text-xs tracking-[0.2em] text-muted uppercase mb-3 block"
             >
               Portfolio
             </motion.span>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-content mb-3 leading-tight">
               {titleWords.map((word, i) => (
                 <motion.span
                   key={word}
@@ -113,19 +113,19 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-zinc-400 text-base max-w-xl"
+              className="text-subtle text-base max-w-xl"
             >
               {projects.length} projects across web, mobile, games, and tools &mdash; each one taught me something new.
             </motion.p>
           </div>
 
-          <div className="flex items-center gap-1 mb-10 border-b border-zinc-800/50">
+          <div className="flex items-center gap-1 mb-10 border-b border-line/50">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleTabChange(cat)}
                 className={`relative px-4 py-3 text-xs font-medium transition-colors duration-200 ${
-                  activeTab === cat ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'
+                  activeTab === cat ? 'text-content' : 'text-muted hover:text-content'
                 }`}
               >
                 {cat}
@@ -142,7 +142,7 @@ export default function ProjectsPage() {
               key={activeTab + filtered.length}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="ml-auto text-[10px] text-zinc-600 tracking-wider"
+              className="ml-auto text-[10px] text-muted tracking-wider"
             >
               {filtered.length} projects
             </motion.span>
@@ -170,7 +170,7 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${p.slug}`}
-                      className="group relative block rounded-2xl bg-zinc-900/40 border border-zinc-800 transition-all duration-300 overflow-hidden"
+                      className="group relative block rounded-2xl bg-card/40 border border-line transition-all duration-300 overflow-hidden"
                       style={{ perspective: '600px' }}
                     >
                       <motion.div
@@ -222,13 +222,13 @@ export default function ProjectsPage() {
                               </motion.span>
                             )}
                             {p.year && (
-                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 border border-zinc-700/50">{p.year}</span>
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-card text-muted border border-line/50">{p.year}</span>
                             )}
                           </div>
                         </div>
 
-                        <h3 className="text-sm font-semibold text-white mb-1.5 group-hover:text-blue-300 transition-colors duration-200">{p.title}</h3>
-                        <p className="text-xs text-zinc-500 leading-relaxed mb-4 line-clamp-2 group-hover:text-zinc-400 transition-colors duration-200">{p.desc}</p>
+                        <h3 className="text-sm font-semibold text-content mb-1.5 group-hover:text-blue-300 transition-colors duration-200">{p.title}</h3>
+                        <p className="text-xs text-muted leading-relaxed mb-4 line-clamp-2 group-hover:text-subtle transition-colors duration-200">{p.desc}</p>
 
                         <div className="flex items-center justify-between">
                           <div className="flex flex-wrap gap-1.5">
@@ -258,7 +258,7 @@ export default function ProjectsPage() {
                             whileHover={{ scale: 1.1, backgroundColor: 'rgba(59,130,246,0.1)', borderColor: 'rgba(59,130,246,0.2)' }}
                           >
                             <motion.svg
-                              className="w-3 h-3 text-zinc-500"
+                              className="w-3 h-3 text-muted"
                               fill="none" viewBox="0 0 24 24" stroke="currentColor"
                               whileHover={{ x: 2, color: '#60a5fa' }}
                               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -281,7 +281,7 @@ export default function ProjectsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="text-center py-20 text-zinc-600 text-sm"
+                className="text-center py-20 text-muted text-sm"
               >
                 No projects in this category yet.
               </motion.div>

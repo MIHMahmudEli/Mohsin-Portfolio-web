@@ -100,7 +100,7 @@ export default function ResearchPage() {
               Research
             </motion.span>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-content mb-3 leading-tight">
               <motion.span
                 initial={{ opacity: 0, y: 30, rotateX: -40 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -124,7 +124,7 @@ export default function ResearchPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-zinc-400 text-base max-w-2xl mb-8"
+              className="text-subtle text-base max-w-2xl mb-8"
             >
               Active research across ML, NLP, telecommunications, and data science.
             </motion.p>
@@ -143,7 +143,7 @@ export default function ResearchPage() {
                   className="flex items-center gap-3"
                 >
                   <span className={`text-2xl md:text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>{stat.value}</span>
-                  <span className="text-[10px] text-zinc-500 tracking-wide leading-tight">{stat.label}</span>
+                  <span className="text-[10px] text-muted tracking-wide leading-tight">{stat.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -164,7 +164,7 @@ export default function ResearchPage() {
                   style={{ perspective: '800px' }}
                 >
                   <div
-                    className="group relative rounded-2xl border border-zinc-800 overflow-hidden h-full bg-zinc-900/40 transition-shadow duration-300"
+                    className="group relative rounded-2xl border border-line overflow-hidden h-full bg-card/40 transition-shadow duration-300"
                     style={{ transformStyle: 'preserve-3d' }}
                     onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px -12px rgba(59,130,246,0.12)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 0 0 transparent'; }}
@@ -190,7 +190,7 @@ export default function ResearchPage() {
                           <span className={`w-2 h-2 rounded-full ${field.dot}`} />
                           <span className={`text-[10px] font-medium ${field.label}`}>{p.field}</span>
                         </motion.span>
-                        <span className="text-[9px] text-zinc-600 font-mono ml-auto">#{String(i + 1).padStart(2, '0')}</span>
+                        <span className="text-[9px] text-muted font-mono ml-auto">#{String(i + 1).padStart(2, '0')}</span>
                       </div>
 
                       <motion.div
@@ -210,7 +210,7 @@ export default function ResearchPage() {
                         <span className={`text-[10px] font-medium ${status.color}`}>{p.status}</span>
                       </motion.div>
 
-                      <h3 className="text-sm font-semibold text-white mb-2 leading-relaxed group-hover:text-blue-200 transition-colors duration-200">
+                      <h3 className="text-sm font-semibold text-content mb-2 leading-relaxed group-hover:text-blue-200 transition-colors duration-200">
                         {p.title}
                       </h3>
 
@@ -218,12 +218,12 @@ export default function ResearchPage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.25 + i * 0.07 }}
-                        className="text-[10px] text-zinc-600 mb-3 font-mono"
+                        className="text-[10px] text-muted mb-3 font-mono"
                       >
                         {p.authors}
                       </motion.p>
 
-                      <p className="text-xs text-zinc-400 leading-relaxed mb-4 group-hover:text-zinc-300 transition-colors duration-200 flex-1">
+                      <p className="text-xs text-subtle leading-relaxed mb-4 group-hover:text-content transition-colors duration-200 flex-1">
                         {p.description}
                       </p>
 
@@ -262,7 +262,7 @@ export default function ResearchPage() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 p-6 rounded-2xl border border-zinc-800 bg-zinc-900/20 relative overflow-hidden group"
+            className="mt-12 p-6 rounded-2xl border border-line bg-card/20 relative overflow-hidden group"
           >
             <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative flex items-center gap-4 flex-wrap">
@@ -275,13 +275,13 @@ export default function ResearchPage() {
                   📄
                 </motion.div>
                 <div>
-                  <div className="text-sm text-white font-medium">Collaboration welcome</div>
-                  <div className="text-xs text-zinc-500">PDF files will be shared once papers are published or approved for release.</div>
+                  <div className="text-sm text-content font-medium">Collaboration welcome</div>
+                  <div className="text-xs text-muted">PDF files will be shared once papers are published or approved for release.</div>
                 </div>
               </div>
               <a
                 href="mailto:mohsinibnahossain@gmail.com"
-                className="ml-auto px-5 py-2.5 bg-white/5 border border-zinc-700 text-zinc-300 rounded-full text-xs font-medium hover:bg-zinc-800 hover:border-blue-500/30 hover:text-blue-300 transition-all"
+                className="ml-auto px-5 py-2.5 bg-overlay/5 border border-line text-content rounded-full text-xs font-medium hover:bg-card hover:border-blue-500/30 hover:text-blue-300 transition-all"
               >
                 Reach out
               </a>

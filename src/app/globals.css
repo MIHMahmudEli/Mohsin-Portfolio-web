@@ -3,6 +3,30 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-content: var(--content);
+  --color-subtle: var(--subtle);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+}
+
+:root {
+  --surface: #000;
+  --card: #18181b;
+  --content: #fff;
+  --subtle: #a1a1aa;
+  --muted: #71717a;
+  --line: #27272a;
+}
+
+.light {
+  --surface: #fff;
+  --card: #f4f4f5;
+  --content: #09090b;
+  --subtle: #71717a;
+  --muted: #a1a1aa;
+  --line: #e4e4e7;
 }
 
 html {

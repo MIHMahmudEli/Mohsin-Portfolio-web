@@ -35,13 +35,13 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center bg-zinc-50">
       <form onSubmit={handleSubmit} className="w-full max-w-sm p-8 bg-white rounded-2xl border border-zinc-200 shadow-sm">
         <h1 className="text-2xl font-bold mb-1">Admin Login</h1>
-        <p className="text-sm text-zinc-500 mb-6">Sign in to manage your portfolio</p>
+        <p className="text-sm text-muted mb-6">Sign in to manage your portfolio</p>
 
         {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
 
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-medium text-zinc-600 block mb-1">Email</label>
+            <label className="text-xs font-medium text-muted block mb-1">Email</label>
             <input
               type="email"
               value={email}
@@ -51,7 +51,7 @@ export default function AdminLogin() {
             />
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-600 block mb-1">Password</label>
+            <label className="text-xs font-medium text-muted block mb-1">Password</label>
             <input
               type="password"
               value={password}
@@ -60,7 +60,7 @@ export default function AdminLogin() {
               required
             />
           </div>
-          <button type="submit" className="w-full py-2.5 bg-black text-white rounded-lg text-sm font-medium hover:bg-zinc-800 transition-colors">
+          <button type="submit" className="w-full py-2.5 bg-surface text-content rounded-lg text-sm font-medium hover:bg-card transition-colors">
             Sign In
           </button>
         </div>

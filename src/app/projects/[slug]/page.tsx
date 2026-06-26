@@ -313,10 +313,10 @@ export default function ProjectDetail() {
       <div className="relative py-32 text-center">
         <div className="fixed inset-0 bg-gradient-to-br from-blue-950/40 via-black to-purple-950/40 pointer-events-none" />
         <div className="relative">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-7xl mb-4 opacity-20 font-bold text-white">404</motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl font-bold text-white mb-4">Project not found</motion.h1>
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-7xl mb-4 opacity-20 font-bold text-content">404</motion.div>
+          <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl font-bold text-content mb-4">Project not found</motion.h1>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <Link href="/projects" className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 border border-white/10 transition-colors">
+            <Link href="/projects" className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-overlay/10 text-content text-sm hover:bg-white/20 border border-line transition-colors">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               Back to projects
             </Link>
@@ -345,7 +345,7 @@ export default function ProjectDetail() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <Link href="/projects" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-zinc-800 text-xs text-zinc-500 hover:text-white hover:border-zinc-600 transition-all">
+            <Link href="/projects" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-line text-xs text-muted hover:text-content hover:border-zinc-600 transition-all">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               Back to projects
             </Link>
@@ -366,7 +366,7 @@ export default function ProjectDetail() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-[10px] tracking-[0.2em] text-zinc-500 uppercase"
+                className="text-[10px] tracking-[0.2em] text-muted uppercase"
               >
                 {project.category} Project
               </motion.span>
@@ -376,7 +376,7 @@ export default function ProjectDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight"
+              className="text-4xl md:text-6xl font-bold text-content mb-4 leading-tight"
             >
               {project.title}
             </motion.h1>
@@ -385,7 +385,7 @@ export default function ProjectDetail() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
-              className="text-lg text-zinc-400 max-w-2xl mb-6"
+              className="text-lg text-subtle max-w-2xl mb-6"
             >
               {project.description}
             </motion.p>
@@ -430,7 +430,7 @@ export default function ProjectDetail() {
               {project.githubUrl && (
                 <a
                   href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-zinc-700 text-zinc-300 text-sm font-medium hover:bg-white/10 hover:text-white hover:border-zinc-500 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-overlay/5 border border-line text-content text-sm font-medium hover:bg-overlay/10 hover:text-content hover:border-zinc-500 transition-all"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
                   Source Code
@@ -443,7 +443,7 @@ export default function ProjectDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="mb-16 rounded-2xl overflow-hidden border border-zinc-800"
+            className="mb-16 rounded-2xl overflow-hidden border border-line"
           >
             <ProjectPreview title={project.title} tech={project.techStack || []} liveUrl={project.liveUrl} />
           </motion.div>
@@ -455,7 +455,7 @@ export default function ProjectDetail() {
                 <a
                   key={s.key}
                   href={`#${s.key}`}
-                  className="text-[10px] tracking-[0.2em] text-zinc-600 hover:text-zinc-300 uppercase transition-colors"
+                  className="text-[10px] tracking-[0.2em] text-muted hover:text-content uppercase transition-colors"
                 >
                   {s.label}
                 </a>
@@ -477,10 +477,10 @@ export default function ProjectDetail() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="relative pl-8 md:pl-10 border-l border-zinc-800">
+                <div className="relative pl-8 md:pl-10 border-l border-line">
                   <div className={`absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b ${section.border.replace('border-', 'from-').replace('/30', '/50')} to-transparent`} />
                   <motion.div
-                    className="absolute -left-3 top-0 w-6 h-6 rounded-full flex items-center justify-center text-xs bg-zinc-900 border border-zinc-700"
+                    className="absolute -left-3 top-0 w-6 h-6 rounded-full flex items-center justify-center text-xs bg-card border border-line"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -489,8 +489,8 @@ export default function ProjectDetail() {
                     {section.icon}
                   </motion.div>
                   <div>
-                    <h3 className="text-sm font-semibold text-white mb-3">{section.title}</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">{section.content}</p>
+                    <h3 className="text-sm font-semibold text-content mb-3">{section.title}</h3>
+                    <p className="text-sm text-subtle leading-relaxed">{section.content}</p>
                   </div>
                 </div>
               </motion.div>
@@ -502,9 +502,9 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 md:p-8 mb-14"
+            className="rounded-2xl border border-line bg-card/30 p-6 md:p-8 mb-14"
           >
-            <h3 className="text-sm font-semibold text-white mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-content mb-6 flex items-center gap-2">
               <span>✨</span> Key Features
             </h3>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -515,12 +515,12 @@ export default function ProjectDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-zinc-800/30 border border-zinc-800 hover:bg-zinc-800/50 hover:border-zinc-700 transition-colors"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-card/30 border border-line hover:bg-card/50 hover:border-line transition-colors"
                 >
                   <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
                     <svg className="w-3 h-3 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <span className="text-sm text-zinc-300">{f}</span>
+                  <span className="text-sm text-content">{f}</span>
                 </motion.div>
               ))}
             </div>
@@ -531,11 +531,11 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex flex-wrap gap-3 items-center justify-between p-6 rounded-2xl border border-zinc-800 bg-gradient-to-r from-blue-500/[0.03] to-purple-500/[0.03]"
+            className="flex flex-wrap gap-3 items-center justify-between p-6 rounded-2xl border border-line bg-gradient-to-r from-blue-500/[0.03] to-purple-500/[0.03]"
           >
             <div>
-              <div className="text-sm text-white font-medium">Like what you see?</div>
-              <div className="text-xs text-zinc-500">Check the live demo or browse the source code.</div>
+              <div className="text-sm text-content font-medium">Like what you see?</div>
+              <div className="text-xs text-muted">Check the live demo or browse the source code.</div>
             </div>
             <div className="flex gap-3">
               {project.liveUrl && (
@@ -544,7 +544,7 @@ export default function ProjectDetail() {
                 </a>
               )}
               {project.githubUrl && (
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 border border-zinc-700 text-zinc-300 rounded-full text-xs font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors">
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 border border-line text-content rounded-full text-xs font-medium hover:bg-card hover:border-zinc-500 transition-colors">
                   Source Code
                 </a>
               )}

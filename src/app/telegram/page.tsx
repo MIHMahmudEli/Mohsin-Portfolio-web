@@ -83,7 +83,7 @@ export default function TelegramPage() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400 mb-6"
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-overlay/5 border border-line text-xs text-subtle mb-6"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                   Telegram Channel
@@ -94,17 +94,17 @@ export default function TelegramPage() {
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ type: 'spring', stiffness: 200, delay: 0.25 }}
-                    className="relative w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 shadow-xl shadow-sky-500/10 bg-black flex items-center justify-center"
+                    className="relative w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 shadow-xl shadow-sky-500/10 bg-surface flex items-center justify-center"
                   >
                     <Image src="/logos/telegram logo.png" alt="Telegram" width={64} height={64} className="object-cover" />
                   </motion.div>
                   <div>
-                    <h1 className="text-4xl md:text-6xl font-bold text-white">{channel.name}</h1>
-                    <p className="text-zinc-500 text-sm mt-1">{channel.handle}</p>
+                    <h1 className="text-4xl md:text-6xl font-bold text-content">{channel.name}</h1>
+                    <p className="text-muted text-sm mt-1">{channel.handle}</p>
                   </div>
                 </div>
 
-                <p className="text-zinc-400 text-base max-w-xl leading-relaxed mb-8">
+                <p className="text-subtle text-base max-w-xl leading-relaxed mb-8">
                   {channel.description}
                 </p>
 
@@ -115,7 +115,7 @@ export default function TelegramPage() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-semibold transition-all shadow-lg shadow-sky-500/25"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-content text-sm font-semibold transition-all shadow-lg shadow-sky-500/25"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
                     Join Channel
@@ -124,7 +124,7 @@ export default function TelegramPage() {
                     href="https://t.me/StudyhubBDBot"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-zinc-300 text-sm font-medium hover:bg-white/5 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-line text-content text-sm font-medium hover:bg-overlay/5 transition-all"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
                     Try Bot
@@ -150,12 +150,12 @@ export default function TelegramPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 + i * 0.08 }}
-                      className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 group hover:border-sky-500/20 transition-all overflow-hidden"
+                      className="relative rounded-2xl border border-line bg-white/[0.03] p-5 group hover:border-sky-500/20 transition-all overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                       <span className="relative text-2xl mb-2 block">{stat.icon}</span>
-                      <p className="relative text-3xl font-bold text-white">{stat.value}</p>
-                      <p className="relative text-xs text-zinc-500 mt-1">{stat.label}</p>
+                      <p className="relative text-3xl font-bold text-content">{stat.value}</p>
+                      <p className="relative text-xs text-muted mt-1">{stat.label}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -170,11 +170,11 @@ export default function TelegramPage() {
           <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-16">
             {fileTypes.map((f) => (
               <FadeUp key={f.label}>
-                <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center group hover:border-sky-500/20 transition-all overflow-hidden cursor-default">
+                <div className="relative rounded-2xl border border-line bg-white/[0.03] p-5 text-center group hover:border-sky-500/20 transition-all overflow-hidden cursor-default">
                   <div className={`absolute inset-0 bg-gradient-to-br ${f.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
                   <span className="relative text-3xl mb-2 block">{f.icon}</span>
-                  <p className="relative text-2xl font-bold text-white">{f.count}</p>
-                  <p className="relative text-[10px] text-zinc-500 mt-1 uppercase tracking-wider">{f.label}</p>
+                  <p className="relative text-2xl font-bold text-content">{f.count}</p>
+                  <p className="relative text-[10px] text-muted mt-1 uppercase tracking-wider">{f.label}</p>
                 </div>
               </FadeUp>
             ))}
@@ -182,7 +182,7 @@ export default function TelegramPage() {
 
           <SectionDivider label="Recent Posts" />
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden mb-16">
+          <div className="rounded-2xl border border-line bg-white/[0.03] overflow-hidden mb-16">
             <div className="divide-y divide-white/[0.04]">
               {recentPosts.map((post, i) => (
                 <motion.div
@@ -199,13 +199,13 @@ export default function TelegramPage() {
                     {post.file}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-zinc-300 truncate group-hover:text-white transition-colors">{post.title}</p>
+                    <p className="text-sm text-content truncate group-hover:text-content transition-colors">{post.title}</p>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-600">{post.type}</span>
-                      <span className="text-[10px] text-zinc-600">{post.size}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-overlay/5 text-muted">{post.type}</span>
+                      <span className="text-[10px] text-muted">{post.size}</span>
                     </div>
                   </div>
-                  <span className="text-[10px] text-zinc-600 shrink-0">{post.time}</span>
+                  <span className="text-[10px] text-muted shrink-0">{post.time}</span>
                 </motion.div>
               ))}
             </div>
@@ -218,26 +218,26 @@ export default function TelegramPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 relative group hover:border-sky-500/30 transition-all flex flex-col"
+              className="rounded-2xl border border-line bg-white/[0.03] p-6 relative group hover:border-sky-500/30 transition-all flex flex-col"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-sky-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
               <div className="relative flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-black flex items-center justify-center shrink-0 overflow-hidden ring-1 ring-white/10">
+                <div className="w-12 h-12 rounded-xl bg-surface flex items-center justify-center shrink-0 overflow-hidden ring-1 ring-white/10">
                   <Image src="/logos/telegram logo.png" alt="" width={48} height={48} className="object-cover" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{channel.handle}</p>
-                  <p className="text-xs text-zinc-500">{channel.subscribers.toLocaleString()} subscribers · {channel.files} files</p>
+                  <p className="text-sm font-semibold text-content">{channel.handle}</p>
+                  <p className="text-xs text-muted">{channel.subscribers.toLocaleString()} subscribers · {channel.files} files</p>
                 </div>
               </div>
-              <p className="relative text-sm text-zinc-500 leading-relaxed flex-1 mb-4">
+              <p className="relative text-sm text-muted leading-relaxed flex-1 mb-4">
                 Academic resources, tech insights, programming tutorials, and study materials shared regularly. Join thousands of students leveling up their skills.
               </p>
               <a
                 href={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-medium transition-all shadow-lg shadow-sky-500/20"
+                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-content text-sm font-medium transition-all shadow-lg shadow-sky-500/20"
               >
                 Open in Telegram
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -249,26 +249,26 @@ export default function TelegramPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 relative group hover:border-red-500/30 transition-all flex flex-col"
+              className="rounded-2xl border border-line bg-white/[0.03] p-6 relative group hover:border-red-500/30 transition-all flex flex-col"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
               <div className="relative flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                  <svg className="w-5 h-5 text-content" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">YouTube Channel</p>
-                  <p className="text-xs text-zinc-500">@studyhub991</p>
+                  <p className="text-sm font-semibold text-content">YouTube Channel</p>
+                  <p className="text-xs text-muted">@studyhub991</p>
                 </div>
               </div>
-              <p className="relative text-sm text-zinc-500 leading-relaxed flex-1 mb-4">
+              <p className="relative text-sm text-muted leading-relaxed flex-1 mb-4">
                 Video tutorials on OS, Computer Networks, Microprocessor, COA & more CSE topics. Subscribe for free academic content.
               </p>
               <a
                 href="https://www.youtube.com/@studyhub991"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 text-white text-sm font-medium transition-all shadow-lg shadow-red-500/20"
+                className="relative inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 text-content text-sm font-medium transition-all shadow-lg shadow-red-500/20"
               >
                 Visit YouTube
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -282,22 +282,22 @@ export default function TelegramPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-white/10 bg-gradient-to-br from-sky-500/5 to-blue-500/5 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:border-sky-500/30 transition-all group"
+            className="rounded-2xl border border-line bg-gradient-to-br from-sky-500/5 to-blue-500/5 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:border-sky-500/30 transition-all group"
           >
             <motion.div
               whileHover={{ rotate: [0, -10, 10, -5, 0] }}
               transition={{ duration: 0.5 }}
-              className="w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 bg-black flex items-center justify-center"
+              className="w-16 h-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-sky-500/30 bg-surface flex items-center justify-center"
             >
               <Image src="/logos/StudyHubBot.png" alt="StudyHub Bot" width={64} height={64} className="object-cover" />
             </motion.div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-lg font-semibold text-white">StudyHub Bot</h3>
+                <h3 className="text-lg font-semibold text-content">StudyHub Bot</h3>
                 <span className="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">Active</span>
               </div>
-              <p className="text-xs text-zinc-500 mb-1">@StudyhubBDBot</p>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <p className="text-xs text-muted mb-1">@StudyhubBDBot</p>
+              <p className="text-sm text-subtle leading-relaxed">
                 Your AI-powered study assistant on Telegram. Get academic resources, routine schedules, 
                 and instant access to StudyHub&apos;s learning materials directly in your chat.
               </p>
@@ -308,7 +308,7 @@ export default function TelegramPage() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-sm font-medium transition-all shadow-lg shadow-sky-500/20 shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-content text-sm font-medium transition-all shadow-lg shadow-sky-500/20 shrink-0"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
               Start Bot

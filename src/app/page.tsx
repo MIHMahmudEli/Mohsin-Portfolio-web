@@ -57,20 +57,20 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-zinc-700/50 rounded-full bg-white/[0.02]"
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-line/50 rounded-full bg-overlay/[0.02]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
-              <span className="text-xs text-zinc-400 tracking-wide">Open to opportunities</span>
+              <span className="text-xs text-subtle tracking-wide">Open to opportunities</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-content mb-6 leading-[1.1] tracking-tight"
             >
               Hi, I&apos;m{' '}
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
@@ -82,7 +82,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg sm:text-xl text-zinc-400 max-w-xl mx-auto lg:mx-0 mb-4 leading-relaxed"
+              className="text-lg sm:text-xl text-subtle max-w-xl mx-auto lg:mx-0 mb-4 leading-relaxed"
             >
               CSE student &middot; Full-stack developer &middot; Researcher
             </motion.p>
@@ -91,7 +91,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.6 }}
-              className="text-sm text-zinc-500 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed"
+              className="text-sm text-muted max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed"
             >
               I build web apps, mobile apps, games, and AI tools &mdash; with 6 research papers in ML, NLP, and CV.
             </motion.p>
@@ -113,7 +113,7 @@ function HeroSection() {
                 href="/Mohsin_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
+                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 Download CV
@@ -121,7 +121,7 @@ function HeroSection() {
 
               <a
                 href="mailto:mohsinibnahossain@gmail.com"
-                className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors"
+                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
               >
                 Get in touch
               </a>
@@ -134,7 +134,7 @@ function HeroSection() {
               className="flex items-center gap-8 mt-12 justify-center lg:justify-start"
             >
               {[
-                { href: 'https://github.com/MIHMahmudEli', label: 'GitHub', hoverColor: 'hover:text-white' },
+                { href: 'https://github.com/MIHMahmudEli', label: 'GitHub', hoverColor: 'hover:text-content' },
                 { href: 'https://linkedin.com/in/mihmahmudeli', label: 'LinkedIn', hoverColor: 'hover:text-blue-400' },
                 { href: 'https://instagram.com/mihmahmudeli2002', label: 'Instagram', hoverColor: 'hover:text-pink-400' },
               ].map((link) => (
@@ -143,7 +143,7 @@ function HeroSection() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-xs text-zinc-600 ${link.hoverColor} transition-colors tracking-wider uppercase`}
+                  className={`text-xs text-muted ${link.hoverColor} transition-colors tracking-wider uppercase`}
                 >
                   {link.label}
                 </a>
@@ -160,7 +160,7 @@ function HeroSection() {
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 animate-pulse-slow blur-3xl" />
 
-              <div className="absolute inset-0 rounded-full border border-zinc-700/50 orbit-ring will-change-transform">
+              <div className="absolute inset-0 rounded-full border border-line/50 orbit-ring will-change-transform">
                 {[0, 60, 120, 180, 240, 300].map((deg) => (
                   <div
                     key={deg}
@@ -175,20 +175,20 @@ function HeroSection() {
                 ))}
               </div>
 
-              <div className="absolute inset-4 rounded-full border border-zinc-700/30 orbit-ring-reverse will-change-transform" />
+              <div className="absolute inset-4 rounded-full border border-line/30 orbit-ring-reverse will-change-transform" />
 
-              <div className="absolute inset-8 rounded-full overflow-hidden border border-zinc-700/50 shadow-2xl">
+              <div className="absolute inset-8 rounded-full overflow-hidden border border-line/50 shadow-2xl">
                 <Image src="/mohsin-photo.png" alt="Mohsin Mahmud Eli" fill className="object-cover" priority />
               </div>
 
-              <div className="absolute -bottom-2 -right-2 bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-4 py-2.5">
+              <div className="absolute -bottom-2 -right-2 bg-card/80 backdrop-blur-md border border-line/50 rounded-2xl px-4 py-2.5">
                 <div className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">41+</div>
-                <div className="text-[10px] text-zinc-500 tracking-wide">Repositories</div>
+                <div className="text-[10px] text-muted tracking-wide">Repositories</div>
               </div>
 
-              <div className="absolute -top-2 -left-2 bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-4 py-2.5">
+              <div className="absolute -top-2 -left-2 bg-card/80 backdrop-blur-md border border-line/50 rounded-2xl px-4 py-2.5">
                 <div className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">6</div>
-                <div className="text-[10px] text-zinc-500 tracking-wide">Papers</div>
+                <div className="text-[10px] text-muted tracking-wide">Papers</div>
               </div>
             </div>
           </motion.div>
@@ -226,14 +226,14 @@ function AboutSection() {
       </div>
       <div className="max-w-6xl mx-auto px-6">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-4">
             Building at the intersection of{' '}
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">code, research, and creativity</span>
           </h2>
         </FadeInUp>
 
         <FadeInUp delay={0.1}>
-          <p className="text-zinc-400 text-lg max-w-2xl mb-12 leading-relaxed">
+          <p className="text-subtle text-lg max-w-2xl mb-12 leading-relaxed">
             CSE student at American International University-Bangladesh. I create full-stack applications, 
             contribute to ML research, and build games &mdash; always exploring the edge where technology meets impact.
           </p>
@@ -242,9 +242,9 @@ function AboutSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {highlights.map((h, i) => (
             <FadeInUp key={h.label} delay={0.1 + i * 0.1}>
-              <div className="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:bg-zinc-900/50 hover:border-zinc-700 transition-colors">
-                <span className="text-[10px] tracking-[0.2em] text-zinc-500 uppercase mb-2 block">{h.label}</span>
-                <p className="text-sm text-zinc-300 leading-relaxed">{h.value}</p>
+              <div className="p-5 rounded-2xl border border-zinc-800 bg-card/30 hover:bg-card/50 hover:border-line transition-colors">
+                <span className="text-[10px] tracking-[0.2em] text-muted uppercase mb-2 block">{h.label}</span>
+                <p className="text-sm text-content leading-relaxed">{h.value}</p>
               </div>
             </FadeInUp>
           ))}
@@ -267,16 +267,16 @@ function SkillsSection() {
   ];
 
   return (
-    <section className="py-28 bg-zinc-950/50 relative">
+    <section className="py-28 bg-surface/50 relative">
       <div className="max-w-6xl mx-auto px-6">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12">Tech Stack</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-12">Tech Stack</h2>
         </FadeInUp>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {skills.map((s, i) => (
             <FadeInUp key={s.name} delay={i * 0.03}>
-              <div className="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors">
+              <div className="p-4 rounded-xl bg-card/40 border border-zinc-800 hover:border-line transition-colors">
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold"
@@ -284,9 +284,9 @@ function SkillsSection() {
                   >
                     {s.name.slice(0, 2)}
                   </div>
-                  <span className="text-sm font-medium text-zinc-200">{s.name}</span>
+                  <span className="text-sm font-medium text-content">{s.name}</span>
                 </div>
-                <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-1 bg-card rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${s.level}%` }}
@@ -316,12 +316,12 @@ function StatsSection() {
   return (
     <section className="py-20 relative">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800/50 rounded-2xl overflow-hidden border border-zinc-800/50">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-card/50 rounded-2xl overflow-hidden border border-line/50">
           {stats.map((s, i) => (
             <FadeInUp key={s.label} delay={i * 0.1}>
-              <div className="bg-zinc-950 p-8 text-center hover:bg-zinc-900/80 transition-colors h-full">
+              <div className="bg-surface p-8 text-center hover:bg-card/80 transition-colors h-full">
                 <div className={`text-3xl md:text-5xl font-bold mb-1 bg-gradient-to-r ${s.gradient} bg-clip-text text-transparent`}>{s.num}</div>
-                <div className="text-xs text-zinc-500 tracking-wide">{s.label}</div>
+                <div className="text-xs text-muted tracking-wide">{s.label}</div>
               </div>
             </FadeInUp>
           ))}
@@ -372,24 +372,24 @@ function FeaturedSection() {
   ];
 
   return (
-    <section className="py-28 bg-zinc-950/50 relative">
+    <section className="py-28 bg-surface/50 relative">
       <div className="max-w-6xl mx-auto px-6">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Explore more</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-4">Explore more</h2>
         </FadeInUp>
         <FadeInUp delay={0.1}>
-          <p className="text-zinc-400 text-lg mb-12 max-w-xl">Beyond code &mdash; research, photography, and game development.</p>
+          <p className="text-subtle text-lg mb-12 max-w-xl">Beyond code &mdash; research, photography, and game development.</p>
         </FadeInUp>
 
         <div className="grid md:grid-cols-3 gap-5">
           {items.map((item, i) => (
             <FadeInUp key={item.title} delay={0.1 + i * 0.1}>
               <Link href={item.link} className={`group block p-6 rounded-2xl border ${item.border} ${item.hoverBorder} bg-gradient-to-br ${item.gradient} transition-colors h-full`}>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${item.accent} bg-white/5 group-hover:bg-white/10 transition-colors`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${item.accent} bg-overlay/5 group-hover:bg-overlay/10 transition-colors`}>
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-5">{item.description}</p>
+                <h3 className="text-xl font-bold text-content mb-2">{item.title}</h3>
+                <p className="text-sm text-subtle leading-relaxed mb-5">{item.description}</p>
                 <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${item.accent} group-hover:gap-2.5 transition-all`}>
                   Learn more <span className="text-sm">&rarr;</span>
                 </span>
@@ -416,10 +416,10 @@ function ProjectsPreviewSection() {
     <section className="py-28 relative">
       <div className="max-w-6xl mx-auto px-6">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Projects</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-4">Projects</h2>
         </FadeInUp>
         <FadeInUp delay={0.1}>
-          <p className="text-zinc-400 text-lg mb-12 max-w-xl">Selected works across web, mobile, and game development.</p>
+          <p className="text-subtle text-lg mb-12 max-w-xl">Selected works across web, mobile, and game development.</p>
         </FadeInUp>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -427,7 +427,7 @@ function ProjectsPreviewSection() {
             <FadeInUp key={p.slug} delay={i * 0.05}>
               <Link
                 href={`/projects/${p.slug}`}
-                className="group block p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800 hover:border-zinc-700 transition-colors h-full"
+                className="group block p-5 rounded-2xl bg-card/30 border border-zinc-800 hover:border-line transition-colors h-full"
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-base font-bold transition-transform group-hover:scale-110"
@@ -435,8 +435,8 @@ function ProjectsPreviewSection() {
                 >
                   {p.title[0]}
                 </div>
-                <h3 className="text-base font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">{p.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{p.desc}</p>
+                <h3 className="text-base font-semibold text-content mb-2 group-hover:text-blue-400 transition-colors">{p.title}</h3>
+                <p className="text-sm text-subtle leading-relaxed">{p.desc}</p>
               </Link>
             </FadeInUp>
           ))}
@@ -446,7 +446,7 @@ function ProjectsPreviewSection() {
           <div className="mt-10 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-zinc-300 rounded-full text-sm hover:bg-zinc-800 hover:border-zinc-500 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-line text-content rounded-full text-sm hover:bg-card hover:border-zinc-500 transition-colors"
             >
               View all projects <span>&rarr;</span>
             </Link>
@@ -459,7 +459,7 @@ function ProjectsPreviewSection() {
 
 function ContactSection() {
   return (
-    <section className="py-28 bg-zinc-950/50 relative border-t border-zinc-800/50">
+    <section className="py-28 bg-surface/50 relative border-t border-line/50">
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <svg className="w-full h-full">
           <defs>
@@ -472,10 +472,10 @@ function ContactSection() {
       </div>
       <div className="max-w-3xl mx-auto px-6 text-center">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Let&apos;s work together</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-4">Let&apos;s work together</h2>
         </FadeInUp>
         <FadeInUp delay={0.1}>
-          <p className="text-zinc-400 text-lg mb-10 max-w-md mx-auto">
+          <p className="text-subtle text-lg mb-10 max-w-md mx-auto">
             Open to collaborations, research discussions, or just a conversation about tech.
           </p>
         </FadeInUp>
@@ -491,7 +491,7 @@ function ContactSection() {
               href="/Mohsin_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               Download CV
@@ -500,7 +500,7 @@ function ContactSection() {
               href="https://github.com/MIHMahmudEli"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
             >
               GitHub
             </a>
@@ -508,7 +508,7 @@ function ContactSection() {
               href="https://instagram.com/mihmahmudeli2002"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-zinc-700 text-zinc-300 rounded-full text-sm font-medium hover:bg-zinc-800 hover:border-zinc-500 transition-colors"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
             >
               Instagram
             </a>

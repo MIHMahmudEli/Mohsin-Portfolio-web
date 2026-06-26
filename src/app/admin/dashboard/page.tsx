@@ -31,7 +31,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-10">
           <div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-zinc-500 text-sm">Welcome, {admin.name}</p>
+            <p className="text-muted text-sm">Welcome, {admin.name}</p>
           </div>
           <button onClick={handleLogout} className="px-4 py-2 text-sm border border-zinc-300 rounded-lg hover:bg-zinc-100 transition-colors">
             Logout
@@ -56,7 +56,7 @@ export default function AdminDashboard() {
               className="p-5 rounded-xl border border-zinc-200 bg-white hover:border-blue-200 hover:shadow-sm transition-all"
             >
               <h3 className="font-semibold mb-1">{item.label}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <p className="text-sm text-muted">{item.desc}</p>
             </a>
           ))}
         </div>

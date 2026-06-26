@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '@/context/ThemeContext';
 
 const icons = {
   Home: (
@@ -27,14 +28,12 @@ const icons = {
   Photography: (
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
   ),
-  Resume: (
-    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-  ),
 };
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   const links = [
     { href: '/', label: 'Home' },
@@ -43,7 +42,6 @@ export default function Navbar() {
     { href: '/research', label: 'Research' },
     { href: '/youtube', label: 'YouTube' },
     { href: '/telegram', label: 'Telegram' },
-    { href: '/Mohsin_Resume.pdf', label: 'Resume' },
     { href: '/photography', label: 'Photography' },
   ];
 
@@ -51,7 +49,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="relative mx-auto mt-4 max-w-5xl px-4">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-xl" />
-        <div className="relative flex h-14 items-center justify-between rounded-2xl border border-white/10 bg-black/80 px-6 backdrop-blur-xl">
+        <div className="relative flex h-14 items-center justify-between rounded-2xl border border-line bg-surface/80 px-6 backdrop-blur-xl">
           <Link href="/" className="group relative text-xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Mohsin
@@ -63,40 +61,61 @@ export default function Navbar() {
           <div className="hidden items-center gap-1 md:flex">
              {links.map((l) => {
               const isActive = path === l.href;
-              const isExternal = l.href.endsWith('.pdf');
-              const Tag = isExternal ? 'a' : Link;
-              const extraProps = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
               return (
-                <Tag
+                <Link
                   key={l.href}
                   href={l.href}
-                  {...extraProps}
                   className={`relative p-2.5 transition-all duration-300 ${
                     isActive
-                      ? 'text-white'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'text-content'
+                      : 'text-subtle hover:text-content'
                   }`}
                 >
-                  {!isExternal && isActive && (
+                  {isActive && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-white/10"
+                      className="absolute inset-0 rounded-lg bg-overlay/10"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
                   <span className="relative z-10 flex items-center justify-center" title={l.label}>
                     {icons[l.label as keyof typeof icons]}
                   </span>
-                </Tag>
+                </Link>
               );
             })}
+            <span className="w-px h-5 bg-line mx-1" />
+            <button
+              onClick={toggleTheme}
+              className="relative p-2 text-subtle hover:text-content transition-colors"
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            >
+              {theme === 'dark' ? (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              )}
+            </button>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="relative z-10 md:hidden p-2">
-            <div className={`w-5 h-0.5 bg-zinc-400 mb-1 transition-all ${open ? 'rotate-45 translate-y-1.5 bg-white' : ''}`} />
-            <div className={`w-5 h-0.5 bg-zinc-400 transition-all ${open ? 'opacity-0' : ''}`} />
-            <div className={`w-5 h-0.5 bg-zinc-400 mt-1 transition-all ${open ? '-rotate-45 -translate-y-1.5 bg-white' : ''}`} />
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-subtle hover:text-content transition-colors"
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            >
+              {theme === 'dark' ? (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              )}
+            </button>
+            <button onClick={() => setOpen(!open)} className="p-2">
+              <div className={`w-5 h-0.5 bg-muted mb-1 transition-all ${open ? 'rotate-45 translate-y-1.5' : ''}`} />
+              <div className={`w-5 h-0.5 bg-muted transition-all ${open ? 'opacity-0' : ''}`} />
+              <div className={`w-5 h-0.5 bg-muted mt-1 transition-all ${open ? '-rotate-45 -translate-y-1.5' : ''}`} />
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -105,29 +124,25 @@ export default function Navbar() {
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              className="absolute left-4 right-4 top-full mt-2 rounded-xl border border-white/10 bg-zinc-950/90 backdrop-blur-xl overflow-hidden"
+              className="absolute left-4 right-4 top-full mt-2 rounded-xl border border-line bg-surface/95 backdrop-blur-xl overflow-hidden"
             >
               <div className="p-2 flex flex-col gap-1">
                  {links.map((l) => {
                   const isActive = path === l.href;
-                  const isExternal = l.href.endsWith('.pdf');
-                  const Tag = isExternal ? 'a' : Link;
-                  const extraProps = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
                   return (
-                    <Tag
+                    <Link
                       key={l.href}
                       href={l.href}
-                      {...extraProps}
-                      onClick={isExternal ? undefined : () => setOpen(false)}
+                      onClick={() => setOpen(false)}
                       className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                         isActive
-                          ? 'bg-white/10 text-white'
-                          : 'text-zinc-400 hover:bg-white/5 hover:text-white'
+                          ? 'bg-overlay/10 text-content'
+                          : 'text-subtle hover:bg-overlay/5 hover:text-content'
                       }`}
                     >
                       <span className="w-4 h-4">{icons[l.label as keyof typeof icons]}</span>
                       {l.label}
-                    </Tag>
+                    </Link>
                   );
                 })}
               </div>

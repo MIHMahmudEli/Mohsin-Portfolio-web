@@ -98,7 +98,7 @@ export default function YouTubePage() {
                 initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ type: 'spring', stiffness: 180, damping: 14, delay: 0.1 }}
-                className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-2xl ring-2 ring-red-500/30 shadow-xl shadow-red-500/10 bg-black"
+                className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-2xl ring-2 ring-red-500/30 shadow-xl shadow-red-500/10 bg-surface"
               >
                 <Image src="/logos/project logo.png" alt="" width={80} height={80} className="object-cover" />
               </motion.div>
@@ -106,7 +106,7 @@ export default function YouTubePage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl md:text-6xl font-bold text-white"
+                className="text-4xl md:text-6xl font-bold text-content"
               >
                 {channel.name}
               </motion.h1>
@@ -116,7 +116,7 @@ export default function YouTubePage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-zinc-400 text-base md:text-lg max-w-xl mb-6"
+              className="text-subtle text-base md:text-lg max-w-xl mb-6"
             >
               {channel.handle} &mdash; Academic tutorials & study resources for CSE students
             </motion.p>
@@ -134,8 +134,8 @@ export default function YouTubePage() {
                   transition={{ delay: 0.35 + i * 0.06, type: 'spring', stiffness: 200, damping: 18 }}
                   className="flex items-center gap-2"
                 >
-                  <span className="text-lg md:text-xl font-bold text-white">{stat.value}</span>
-                  <span className="text-[10px] text-zinc-500">{stat.label}</span>
+                  <span className="text-lg md:text-xl font-bold text-content">{stat.value}</span>
+                  <span className="text-[10px] text-muted">{stat.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -147,7 +147,7 @@ export default function YouTubePage() {
             >
               <a
                 href={channel.url} target="_blank" rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-semibold transition-all hover:shadow-xl hover:shadow-red-500/25"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-content text-sm font-semibold transition-all hover:shadow-xl hover:shadow-red-500/25"
               >
                 <motion.svg
                   className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"
@@ -181,7 +181,7 @@ export default function YouTubePage() {
               >
                 <button
                   onClick={() => setActiveVideo(null)}
-                  className="absolute -top-10 right-0 text-zinc-400 hover:text-white transition-colors text-sm z-10"
+                  className="absolute -top-10 right-0 text-subtle hover:text-content transition-colors text-sm z-10"
                 >
                   Close [Esc]
                 </button>
@@ -232,7 +232,7 @@ export default function YouTubePage() {
                 className={`relative px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors duration-150 ${
                   activeCategory === cat
                     ? 'text-red-300 border-red-500/30'
-                    : 'text-zinc-500 border-transparent hover:text-zinc-300'
+                    : 'text-muted border-transparent hover:text-content'
                 }`}
               >
                 {cat === 'All' ? 'All Videos' : cat}
@@ -253,10 +253,10 @@ export default function YouTubePage() {
                     exit={{ opacity: 0, scale: 0.92, y: -10 }}
                     transition={{ type: 'spring', stiffness: 160, damping: 20, delay: i * 0.05 }}
                     onClick={() => setActiveVideo(video.id)}
-                    className="group relative text-left rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900/40 hover:border-zinc-600 transition-all"
+                    className="group relative text-left rounded-xl overflow-hidden border border-zinc-800 bg-card/40 hover:border-zinc-600 transition-all"
                     whileHover={{ y: -4 }}
                   >
-                    <div className="relative aspect-video bg-zinc-900 overflow-hidden">
+                    <div className="relative aspect-video bg-card overflow-hidden">
                       <Image
                         src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
                         alt={video.title}
@@ -274,20 +274,20 @@ export default function YouTubePage() {
                           whileHover={{ scale: 1.1 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                         >
-                          <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                          <svg className="w-5 h-5 text-content ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                         </motion.div>
                       </motion.div>
-                      <div className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/80 text-[10px] text-zinc-300 font-medium">
+                      <div className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/80 text-[10px] text-content font-medium">
                         {video.duration}
                       </div>
                     </div>
                     <div className="p-3">
                       <div className="flex items-center gap-1.5 mb-1.5">
-                        <span className={`text-[8px] px-1.5 py-0.5 rounded-full border font-medium ${badgeColors[video.category] || 'bg-white/5 text-zinc-500 border-white/10'}`}>
+                        <span className={`text-[8px] px-1.5 py-0.5 rounded-full border font-medium ${badgeColors[video.category] || 'bg-overlay/5 text-muted border-line'}`}>
                           {video.category}
                         </span>
                       </div>
-                      <p className="text-xs text-zinc-300 leading-relaxed line-clamp-2 group-hover:text-white transition-colors duration-200">
+                      <p className="text-xs text-content leading-relaxed line-clamp-2 group-hover:text-content transition-colors duration-200">
                         {video.title}
                       </p>
                     </div>
@@ -313,7 +313,7 @@ export default function YouTubePage() {
               {
                 icon: (
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                    <svg className="w-5 h-5 text-content" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                   </div>
                 ),
                 title: channel.handle,
@@ -337,23 +337,23 @@ export default function YouTubePage() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <motion.div
-                    className="w-10 h-10 rounded-xl bg-black flex items-center justify-center shrink-0 overflow-hidden ring-1 ring-white/10"
+                    className="w-10 h-10 rounded-xl bg-surface flex items-center justify-center shrink-0 overflow-hidden ring-1 ring-white/10"
                     whileHover={{ scale: 1.1, rotate: -5 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                   >
                     {card.icon}
                   </motion.div>
                   <div>
-                    <p className="text-sm font-semibold text-white">{card.title}</p>
-                    <p className="text-xs text-zinc-500">{card.subs}</p>
+                    <p className="text-sm font-semibold text-content">{card.title}</p>
+                    <p className="text-xs text-muted">{card.subs}</p>
                   </div>
                 </div>
-                <p className="text-xs text-zinc-500 leading-relaxed flex-1">
+                <p className="text-xs text-muted leading-relaxed flex-1">
                   {card.desc}
                 </p>
                 <a
                   href={card.url} target="_blank" rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl text-white text-sm font-medium transition-all hover:shadow-xl hover:-translate-y-0.5 mt-3 ${card.btnClass}`}
+                  className={`inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl text-content text-sm font-medium transition-all hover:shadow-xl hover:-translate-y-0.5 mt-3 ${card.btnClass}`}
                 >
                   {card.btnText}
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
