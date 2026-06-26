@@ -287,7 +287,7 @@ export default function YouTubePage() {
                           {video.category}
                         </span>
                       </div>
-                      <p className="text-xs text-content leading-relaxed line-clamp-2 group-hover:text-content transition-colors duration-200">
+                      <p className="text-xs text-content leading-relaxed line-clamp-2 group-hover:text-blue-400 transition-colors duration-200">
                         {video.title}
                       </p>
                     </div>

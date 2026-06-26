@@ -134,7 +134,7 @@ function HeroSection() {
               className="flex items-center gap-8 mt-12 justify-center lg:justify-start"
             >
               {[
-                { href: 'https://github.com/MIHMahmudEli', label: 'GitHub', hoverColor: 'hover:text-content' },
+                { href: 'https://github.com/MIHMahmudEli', label: 'GitHub', hoverColor: 'hover:text-blue-400' },
                 { href: 'https://linkedin.com/in/mihmahmudeli', label: 'LinkedIn', hoverColor: 'hover:text-blue-400' },
                 { href: 'https://instagram.com/mihmahmudeli2002', label: 'Instagram', hoverColor: 'hover:text-pink-400' },
               ].map((link) => (

@@ -210,7 +210,7 @@ export default function ResearchPage() {
                         <span className={`text-[10px] font-medium ${status.color}`}>{p.status}</span>
                       </motion.div>
 
-                      <h3 className="text-sm font-semibold text-content mb-2 leading-relaxed group-hover:text-blue-200 transition-colors duration-200">
+                      <h3 className="text-sm font-semibold text-content mb-2 leading-relaxed group-hover:text-blue-400 transition-colors duration-200">
                         {p.title}
                       </h3>
 
@@ -223,7 +223,7 @@ export default function ResearchPage() {
                         {p.authors}
                       </motion.p>
 
-                      <p className="text-xs text-subtle leading-relaxed mb-4 group-hover:text-content transition-colors duration-200 flex-1">
+                      <p className="text-xs text-subtle leading-relaxed mb-4 group-hover:text-blue-400 transition-colors duration-200 flex-1">
                         {p.description}
                       </p>
 

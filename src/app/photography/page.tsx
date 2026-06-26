@@ -121,7 +121,7 @@ export default function PhotographyPage() {
             >
               <button
                 onClick={close}
-                className="absolute -top-10 right-0 text-xs text-muted hover:text-content transition-colors z-10"
+                className="absolute -top-10 right-0 text-xs text-muted hover:text-blue-400 transition-colors z-10"
               >
                 Close
               </button>
@@ -135,7 +135,7 @@ export default function PhotographyPage() {
               {idx > 0 && (
                 <button
                   onClick={prev}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-line flex items-center justify-center text-subtle hover:text-content hover:bg-black/80 transition-all"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-line flex items-center justify-center text-subtle hover:text-blue-400 hover:bg-black/80 transition-all"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
@@ -143,7 +143,7 @@ export default function PhotographyPage() {
               {idx < photos.length - 1 && (
                 <button
                   onClick={next}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-line flex items-center justify-center text-subtle hover:text-content hover:bg-black/80 transition-all"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-line flex items-center justify-center text-subtle hover:text-blue-400 hover:bg-black/80 transition-all"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </button>

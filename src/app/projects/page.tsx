@@ -227,8 +227,8 @@ export default function ProjectsPage() {
                           </div>
                         </div>
 
-                        <h3 className="text-sm font-semibold text-content mb-1.5 group-hover:text-blue-300 transition-colors duration-200">{p.title}</h3>
-                        <p className="text-xs text-muted leading-relaxed mb-4 line-clamp-2 group-hover:text-subtle transition-colors duration-200">{p.desc}</p>
+                        <h3 className="text-sm font-semibold text-content mb-1.5 group-hover:text-blue-400 transition-colors duration-200">{p.title}</h3>
+                        <p className="text-xs text-muted leading-relaxed mb-4 line-clamp-2 group-hover:text-blue-400 transition-colors duration-200">{p.desc}</p>
 
                         <div className="flex items-center justify-between">
                           <div className="flex flex-wrap gap-1.5">

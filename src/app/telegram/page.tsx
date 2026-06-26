@@ -199,7 +199,7 @@ export default function TelegramPage() {
                     {post.file}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-content truncate group-hover:text-content transition-colors">{post.title}</p>
+                    <p className="text-sm text-content truncate group-hover:text-blue-400 transition-colors">{post.title}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-overlay/5 text-muted">{post.type}</span>
                       <span className="text-[10px] text-muted">{post.size}</span>
