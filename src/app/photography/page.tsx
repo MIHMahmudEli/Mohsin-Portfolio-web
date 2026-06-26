@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 const photos = [
   'photo-1.jpg', 'photo-2.jpg', 'photo-3.jpg', 'photo-4.jpg', 'photo-5.jpg',
@@ -9,162 +9,153 @@ const photos = [
   'photo-11.jpg', 'photo-12.webp', 'photo-13.webp', 'photo-14.webp', 'photo-15.jpg',
   'photo-16.jpg', 'photo-17.jpg', 'photo-18.jpg', 'photo-19.webp', 'photo-20.jpg',
   'photo-21.jpg',
-].map((f, i) => ({ src: `/photography/${f}`, alt: `Photography ${i + 1}` }));
+].map((f, i) => ({ src: `/photography/${f}`, alt: `Photography ${i + 1}`, id: i }));
 
 const instagram = {
   handle: '@mihmahmudeli2002',
   url: 'https://www.instagram.com/mihmahmudeli2002/',
 };
 
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
+
 export default function PhotographyPage() {
+  const [lightbox, setLightbox] = useState<typeof photos[0] | null>(null);
+  const idx = lightbox ? photos.findIndex(p => p.id === lightbox.id) : -1;
+
+  const open = (p: typeof photos[0]) => setLightbox(p);
+  const close = () => setLightbox(null);
+  const prev = () => idx > 0 && setLightbox(photos[idx - 1]);
+  const next = () => idx < photos.length - 1 && setLightbox(photos[idx + 1]);
+
   return (
     <>
-      <div className="fixed inset-0 bg-gradient-to-br from-amber-950/30 via-black to-orange-950/30 pointer-events-none" />
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,146,60,0.06),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(251,191,36,0.06),transparent_50%)] pointer-events-none" />
-      <div className="relative">
-        <section className="relative min-h-[80vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-black/60" />
-          <div className="absolute top-20 right-48 w-72 h-72 bg-amber-500/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-500/8 rounded-full blur-[140px]" />
+      <div className="relative min-h-screen">
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-black to-black pointer-events-none" />
 
-          <div className="relative z-10 max-w-5xl mx-auto px-4 w-full py-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400 mb-6"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                  Photography
-                </motion.div>
+        <section className="relative pt-32 pb-16 md:pt-40 md:pb-20">
+          <div className="max-w-6xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="max-w-2xl"
+            >
+              <span className="text-[10px] tracking-[0.25em] text-amber-500/70 uppercase mb-4 block">Portfolio</span>
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight tracking-tight">
+                Photography
+              </h1>
+              <p className="text-zinc-400 text-base leading-relaxed max-w-lg">
+                A visual journal captured through the lens — landscapes, streets, architecture, and everyday moments.
+              </p>
+            </motion.div>
 
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                  Capturing moments
-                  <span className="block bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent">
-                    through the lens
-                  </span>
-                </h1>
-
-                <p className="text-zinc-400 text-base max-w-xl leading-relaxed mb-8">
-                  A visual journey through landscapes, architecture, and everyday stories.
-                  Follow my adventures on Instagram.
-                </p>
-
-                <div className="flex items-center gap-4 flex-wrap">
-                  <motion.a
-                    href={instagram.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white text-sm font-semibold transition-all shadow-lg shadow-amber-500/25"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
-                    Follow on Instagram
-                  </motion.a>
-                  <span className="text-sm text-zinc-500">{instagram.handle}</span>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="relative"
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease }}
+              className="flex items-center gap-4 mt-8"
+            >
+              <a
+                href={instagram.url} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-semibold hover:from-amber-400 hover:to-orange-400 transition-all"
               >
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: '📷', label: 'Photos', value: 'Latest shots' },
-                    { icon: '📍', label: 'Locations', value: 'Worldwide' },
-                    { icon: '🎨', label: 'Style', value: 'Documentary' },
-                    { icon: '📱', label: 'Instagram', value: 'Active' },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 + i * 0.08 }}
-                      className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 group hover:border-amber-500/20 transition-all overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <span className="relative text-2xl mb-2 block">{stat.icon}</span>
-                      <p className="relative text-xl font-bold text-white">{stat.value}</p>
-                      <p className="relative text-xs text-zinc-500 mt-1">{stat.label}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
+                {instagram.handle}
+              </a>
+              <span className="text-[10px] text-zinc-600">{photos.length} photos</span>
+            </motion.div>
           </div>
         </section>
 
         <section className="pb-24">
-          <div className="max-w-6xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-3 mb-10"
-            >
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-              <span className="text-xs font-semibold tracking-[0.2em] text-amber-400 uppercase shrink-0">Gallery</span>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-            </motion.div>
-
-            <div className="columns-2 md:columns-3 gap-3 space-y-3">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="columns-2 md:columns-3 gap-4 space-y-4">
               {photos.map((photo, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                <motion.button
+                  key={photo.id}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.03 }}
-                  className="relative group rounded-xl overflow-hidden border border-white/10 break-inside-avoid"
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease }}
+                  onClick={() => open(photo)}
+                  className="group relative overflow-hidden rounded-xl break-inside-avoid w-full text-left bg-zinc-900/50 border border-zinc-800/50"
                 >
                   <img
                     src={photo.src}
                     alt={photo.alt}
                     loading="lazy"
-                    className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <a
-                      href={instagram.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-lg bg-white/90 text-black text-xs font-medium hover:bg-white transition-all"
-                    >
-                      View on Instagram
-                    </a>
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                      <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                    </div>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-12 text-center"
-            >
-              <motion.a
-                href={instagram.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white text-sm font-semibold transition-all shadow-lg shadow-amber-500/25"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
-                    See More on Instagram
-                  </motion.a>
-              <p className="text-xs text-zinc-600 mt-4">@{instagram.handle.replace('@', '')}</p>
-            </motion.div>
           </div>
         </section>
       </div>
+
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            onClick={close}
+          >
+            <motion.div
+              key={lightbox.id}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.3, ease }}
+              className="relative w-full max-w-5xl flex items-center justify-center"
+              style={{ maxHeight: '90vh' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={close}
+                className="absolute -top-10 right-0 text-xs text-zinc-500 hover:text-white transition-colors z-10"
+              >
+                Close
+              </button>
+
+              <img
+                src={lightbox.src}
+                alt={lightbox.alt}
+                className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              />
+
+              {idx > 0 && (
+                <button
+                  onClick={prev}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-black/80 transition-all"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                </button>
+              )}
+              {idx < photos.length - 1 && (
+                <button
+                  onClick={next}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-black/80 transition-all"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </button>
+              )}
+
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-zinc-600">
+                {idx + 1} / {photos.length}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
