@@ -20,16 +20,18 @@
   --muted: #71717a;
   --line: #27272a;
   --overlay: #fff;
+  --orb-alpha: 0.1;
 }
 
 .light {
-  --surface: #ffffff;
-  --card: #e0e0e0;
-  --content: #111111;
-  --subtle: #525252;
+  --surface: #f8f7f4;
+  --card: #ffffff;
+  --content: #1c1c1c;
+  --subtle: #6b6b6b;
   --muted: #a0a0a0;
-  --line: #e0e0e0;
+  --line: #e6e3de;
   --overlay: #000;
+  --orb-alpha: 0.2;
 }
 
 html {

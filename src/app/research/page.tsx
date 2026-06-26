@@ -80,8 +80,8 @@ export default function ResearchPage() {
       <div className="fixed inset-0 bg-gradient-to-br from-blue-950/20 via-surface to-emerald-950/20 pointer-events-none" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-[5%] w-72 h-72 rounded-full bg-blue-500/10 blur-[120px] floating-shape" style={{ animationDuration: '28s' }} />
-        <div className="absolute bottom-20 right-[5%] w-80 h-80 rounded-full bg-emerald-500/10 blur-[120px] floating-shape" style={{ animationDuration: '32s', animationDelay: '-8s' }} />
+        <div className="absolute top-20 left-[5%] w-72 h-72 rounded-full bg-blue-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDuration: '28s' }} />
+        <div className="absolute bottom-20 right-[5%] w-80 h-80 rounded-full bg-emerald-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDuration: '32s', animationDelay: '-8s' }} />
       </div>
 
       <div className="relative py-16 md:py-24">

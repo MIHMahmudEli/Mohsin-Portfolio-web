@@ -39,10 +39,10 @@ function HeroSection() {
           </svg>
         </div>
 
-        <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-blue-500/10 blur-[100px] floating-shape" style={{ animationDelay: '0s', animationDuration: '25s' }} />
-        <div className="absolute top-10 right-[10%] w-56 h-56 rounded-full bg-purple-500/10 blur-[80px] floating-shape" style={{ animationDelay: '-8s', animationDuration: '30s' }} />
-        <div className="absolute bottom-40 right-[25%] w-48 h-48 rounded-full bg-pink-500/10 blur-[70px] floating-shape" style={{ animationDelay: '-4s', animationDuration: '22s' }} />
-        <div className="absolute bottom-20 left-[20%] w-40 h-40 rounded-full bg-emerald-500/10 blur-[60px] floating-shape" style={{ animationDelay: '-12s', animationDuration: '28s' }} />
+        <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-blue-500/[var(--orb-alpha)] blur-[100px] floating-shape" style={{ animationDelay: '0s', animationDuration: '25s' }} />
+        <div className="absolute top-10 right-[10%] w-56 h-56 rounded-full bg-purple-500/[var(--orb-alpha)] blur-[80px] floating-shape" style={{ animationDelay: '-8s', animationDuration: '30s' }} />
+        <div className="absolute bottom-40 right-[25%] w-48 h-48 rounded-full bg-pink-500/[var(--orb-alpha)] blur-[70px] floating-shape" style={{ animationDelay: '-4s', animationDuration: '22s' }} />
+        <div className="absolute bottom-20 left-[20%] w-40 h-40 rounded-full bg-emerald-500/[var(--orb-alpha)] blur-[60px] floating-shape" style={{ animationDelay: '-12s', animationDuration: '28s' }} />
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}

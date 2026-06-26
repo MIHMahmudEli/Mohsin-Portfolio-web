@@ -60,9 +60,9 @@ export default function GamesPage() {
       <div className="fixed inset-0 bg-gradient-to-br from-emerald-950/20 via-surface to-blue-950/20 pointer-events-none" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-emerald-500/10 blur-[120px] floating-shape" style={{ animationDelay: '0s', animationDuration: '30s' }} />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-blue-500/10 blur-[120px] floating-shape" style={{ animationDelay: '-10s', animationDuration: '35s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-teal-500/8 blur-[100px] floating-shape" style={{ animationDelay: '-5s', animationDuration: '25s' }} />
+        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-emerald-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDelay: '0s', animationDuration: '30s' }} />
+        <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-blue-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDelay: '-10s', animationDuration: '35s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-teal-500/[var(--orb-alpha)] blur-[100px] floating-shape" style={{ animationDelay: '-5s', animationDuration: '25s' }} />
       </div>
 
       <div className="relative py-16 md:py-24">

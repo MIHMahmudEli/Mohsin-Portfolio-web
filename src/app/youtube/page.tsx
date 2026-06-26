@@ -68,9 +68,9 @@ export default function YouTubePage() {
       <div className="fixed inset-0 bg-gradient-to-br from-red-950/20 via-surface to-rose-950/20 pointer-events-none" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-red-500/10 blur-[120px] floating-shape" style={{ animationDuration: '28s' }} />
-        <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-rose-500/10 blur-[120px] floating-shape" style={{ animationDuration: '32s', animationDelay: '-8s' }} />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-orange-500/8 blur-[100px] floating-shape" style={{ animationDuration: '25s', animationDelay: '-4s' }} />
+        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-red-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDuration: '28s' }} />
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-rose-500/[var(--orb-alpha)] blur-[120px] floating-shape" style={{ animationDuration: '32s', animationDelay: '-8s' }} />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-orange-500/[var(--orb-alpha)] blur-[100px] floating-shape" style={{ animationDuration: '25s', animationDelay: '-4s' }} />
       </div>
 
       <div className="relative">
