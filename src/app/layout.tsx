@@ -15,8 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen flex flex-col antialiased bg-surface text-content">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.classList.toggle('light',t==='light');})()`
+        }} />
+      </head>
+      <body className="min-h-screen flex flex-col antialiased bg-surface text-content transition-colors duration-300">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1 pt-24">{children}</main>

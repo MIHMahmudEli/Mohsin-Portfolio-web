@@ -9,6 +9,7 @@
   --color-subtle: var(--subtle);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-overlay: var(--overlay);
 }
 
 :root {
@@ -18,15 +19,17 @@
   --subtle: #a1a1aa;
   --muted: #71717a;
   --line: #27272a;
+  --overlay: #fff;
 }
 
 .light {
-  --surface: #fff;
-  --card: #f4f4f5;
-  --content: #09090b;
-  --subtle: #71717a;
+  --surface: #f5f5f5;
+  --card: #ffffff;
+  --content: #18181b;
+  --subtle: #52525b;
   --muted: #a1a1aa;
-  --line: #e4e4e7;
+  --line: #e5e5e5;
+  --overlay: #000;
 }
 
 html {
