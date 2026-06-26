@@ -113,7 +113,7 @@ function HeroSection() {
                 href="/Mohsin_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
+                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-line transition-colors inline-flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 Download CV
@@ -121,7 +121,7 @@ function HeroSection() {
 
               <a
                 href="mailto:mohsinibnahossain@gmail.com"
-                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
+                className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-line transition-colors"
               >
                 Get in touch
               </a>
@@ -197,8 +197,8 @@ function HeroSection() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="flex flex-col items-center gap-2 scroll-bounce">
-          <span className="text-[10px] text-zinc-700 tracking-[0.3em]">SCROLL</span>
-          <svg className="w-3.5 h-3.5 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+          <span className="text-[10px] text-muted tracking-[0.3em]">SCROLL</span>
+          <svg className="w-3.5 h-3.5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
         </div>
       </div>
     </section>
@@ -242,7 +242,7 @@ function AboutSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {highlights.map((h, i) => (
             <FadeInUp key={h.label} delay={0.1 + i * 0.1}>
-              <div className="p-5 rounded-2xl border border-zinc-800 bg-card/30 hover:bg-card/50 hover:border-line transition-colors">
+              <div className="p-5 rounded-2xl border border-line bg-card/30 hover:bg-card/50 hover:border-line transition-colors">
                 <span className="text-[10px] tracking-[0.2em] text-muted uppercase mb-2 block">{h.label}</span>
                 <p className="text-sm text-content leading-relaxed">{h.value}</p>
               </div>
@@ -276,7 +276,7 @@ function SkillsSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {skills.map((s, i) => (
             <FadeInUp key={s.name} delay={i * 0.03}>
-              <div className="p-4 rounded-xl bg-card/40 border border-zinc-800 hover:border-line transition-colors">
+              <div className="p-4 rounded-xl bg-card/40 border border-line hover:border-line transition-colors">
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold"
@@ -427,7 +427,7 @@ function ProjectsPreviewSection() {
             <FadeInUp key={p.slug} delay={i * 0.05}>
               <Link
                 href={`/projects/${p.slug}`}
-                className="group block p-5 rounded-2xl bg-card/30 border border-zinc-800 hover:border-line transition-colors h-full"
+                className="group block p-5 rounded-2xl bg-card/30 border border-line hover:border-line transition-colors h-full"
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-base font-bold transition-transform group-hover:scale-110"
@@ -446,7 +446,7 @@ function ProjectsPreviewSection() {
           <div className="mt-10 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-line text-content rounded-full text-sm hover:bg-card hover:border-zinc-500 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-line text-content rounded-full text-sm hover:bg-card hover:border-line transition-colors"
             >
               View all projects <span>&rarr;</span>
             </Link>
@@ -491,7 +491,7 @@ function ContactSection() {
               href="/Mohsin_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors inline-flex items-center gap-2"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-line transition-colors inline-flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               Download CV
@@ -500,7 +500,7 @@ function ContactSection() {
               href="https://github.com/MIHMahmudEli"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-line transition-colors"
             >
               GitHub
             </a>
@@ -508,7 +508,7 @@ function ContactSection() {
               href="https://instagram.com/mihmahmudeli2002"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-zinc-500 transition-colors"
+              className="px-8 py-3.5 border border-line text-content rounded-full text-sm font-medium hover:bg-card hover:border-line transition-colors"
             >
               Instagram
             </a>

@@ -253,7 +253,7 @@ export default function YouTubePage() {
                     exit={{ opacity: 0, scale: 0.92, y: -10 }}
                     transition={{ type: 'spring', stiffness: 160, damping: 20, delay: i * 0.05 }}
                     onClick={() => setActiveVideo(video.id)}
-                    className="group relative text-left rounded-xl overflow-hidden border border-zinc-800 bg-card/40 hover:border-zinc-600 transition-all"
+                    className="group relative text-left rounded-xl overflow-hidden border border-line bg-card/40 hover:border-line transition-all"
                     whileHover={{ y: -4 }}
                   >
                     <div className="relative aspect-video bg-card overflow-hidden">
@@ -333,7 +333,7 @@ export default function YouTubePage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: 'spring', stiffness: 180, damping: 20 }}
                 whileHover={{ y: -3 }}
-                className={`rounded-2xl border border-zinc-800 bg-gradient-to-br ${card.accent} p-5 flex flex-col group ${card.border} transition-all`}
+                className={`rounded-2xl border border-line bg-gradient-to-br ${card.accent} p-5 flex flex-col group ${card.border} transition-all`}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <motion.div

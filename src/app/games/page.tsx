@@ -281,7 +281,7 @@ export default function GamesPage() {
             </div>
             <Link
               href="/projects"
-              className="relative px-5 py-2.5 border border-line text-content rounded-full text-xs font-medium hover:bg-card hover:border-zinc-500 transition-colors"
+              className="relative px-5 py-2.5 border border-line text-content rounded-full text-xs font-medium hover:bg-card hover:border-line transition-colors"
             >
               View all projects
             </Link>

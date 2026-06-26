@@ -32,17 +32,17 @@ export default function ProjectPreview({ title, tech, liveUrl }: { title: string
 
   if (liveUrl && !iframeFailed) {
     return (
-      <div className="relative w-full rounded-xl overflow-hidden bg-zinc-900/80 border border-white/10">
-        <div className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900/90 border-b border-white/5">
+      <div className="relative w-full rounded-xl overflow-hidden bg-card/80 border border-line">
+        <div className="flex items-center gap-2 px-4 py-2.5 bg-card/90 border-b border-line/5">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500/80" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <div className="flex-1 mx-3 px-3 py-1 rounded-md bg-zinc-800 text-xs text-zinc-400 truncate select-none">
+          <div className="flex-1 mx-3 px-3 py-1 rounded-md bg-card text-xs text-subtle truncate select-none">
             {liveUrl}
           </div>
-          <button onClick={() => window.open(liveUrl, '_blank')} className="text-zinc-500 hover:text-white transition-colors cursor-pointer">
+          <button onClick={() => window.open(liveUrl, '_blank')} className="text-muted hover:text-content transition-colors cursor-pointer">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
           </button>
         </div>
@@ -58,12 +58,12 @@ export default function ProjectPreview({ title, tech, liveUrl }: { title: string
           {iframeFailed && (
             <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${grad} ${pattern}`}>
               <div className="text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/60 text-lg font-bold">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-overlay/10 backdrop-blur-sm flex items-center justify-center text-content/60 text-lg font-bold">
                   {title[0]}
                 </div>
-                <h3 className="text-white font-semibold text-lg">{title}</h3>
-                <p className="text-zinc-400 text-sm mt-1">Could not load preview</p>
-                <button onClick={() => window.open(liveUrl, '_blank')} className="inline-block mt-3 px-4 py-1.5 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 transition-all border border-white/10 cursor-pointer">
+                <h3 className="text-content font-semibold text-lg">{title}</h3>
+                <p className="text-subtle text-sm mt-1">Could not load preview</p>
+                <button onClick={() => window.open(liveUrl, '_blank')} className="inline-block mt-3 px-4 py-1.5 rounded-full bg-overlay/10 text-content text-sm hover:bg-overlay/20 transition-all border border-line cursor-pointer">
                   Open Live
                 </button>
               </div>
@@ -79,20 +79,20 @@ export default function ProjectPreview({ title, tech, liveUrl }: { title: string
       <div className="absolute inset-0 bg-black/20" />
       <div className="absolute inset-0 flex items-center justify-center p-6">
         <div className="text-center">
-          <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/60 text-lg font-bold">
+          <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-overlay/10 backdrop-blur-sm flex items-center justify-center text-content/60 text-lg font-bold">
             {title[0]}
           </div>
-          <h3 className="text-white font-semibold text-lg drop-shadow-lg">{title}</h3>
+          <h3 className="text-content font-semibold text-lg drop-shadow-lg">{title}</h3>
           <div className="flex flex-wrap justify-center gap-1.5 mt-2">
             {tech.slice(0, 3).map((t) => (
-              <span key={t} className="text-[9px] px-2 py-0.5 rounded-full bg-white/10 text-white/70 border border-white/10">
+              <span key={t} className="text-[9px] px-2 py-0.5 rounded-full bg-overlay/10 text-content/70 border border-line">
                 {t}
               </span>
             ))}
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 ring-1 ring-white/10 rounded-xl" />
+      <div className="absolute inset-0 ring-1 ring-line rounded-xl" />
     </div>
   );
 }
