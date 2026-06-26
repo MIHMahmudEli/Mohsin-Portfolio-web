@@ -262,7 +262,7 @@ export default function ResearchPage() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 p-6 rounded-2xl border border-line bg-card/20 relative overflow-hidden group"
+            className="mt-12 p-6 rounded-2xl border border-line bg-card/30 relative overflow-hidden group"
           >
             <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative flex items-center gap-4 flex-wrap">

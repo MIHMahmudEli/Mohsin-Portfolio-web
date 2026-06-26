@@ -260,7 +260,7 @@ export default function GamesPage() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 p-6 rounded-2xl border border-line bg-card/20 flex items-center justify-between flex-wrap gap-4 relative overflow-hidden group"
+            className="mt-12 p-6 rounded-2xl border border-line bg-card/30 flex items-center justify-between flex-wrap gap-4 relative overflow-hidden group"
             whileHover={{ y: -2 }}
           >
             <motion.div
