@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -45,6 +45,23 @@ export default function YouTubePage() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const filtered = activeCategory === 'All' ? videos : videos.filter((v) => v.category === activeCategory);
+
+  const catRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const updateIndicator = useCallback(() => {
+    const btn = catRefs.current[activeCategory];
+    if (!btn) return;
+    const parent = btn.parentElement;
+    if (!parent) return;
+    const pr = parent.getBoundingClientRect();
+    const br = btn.getBoundingClientRect();
+    setIndicator({ left: br.left - pr.left, width: br.width });
+  }, [activeCategory]);
+  useEffect(() => { updateIndicator(); }, [updateIndicator]);
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
 
   return (
     <>
@@ -194,31 +211,31 @@ export default function YouTubePage() {
           </motion.div>
 
           <motion.div
-            className="flex gap-1.5 mb-6 flex-wrap"
+            className="flex gap-1.5 mb-6 flex-wrap relative"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.4 }}
           >
+            <div className="absolute inset-0 pointer-events-none">
+              <motion.div
+                className="absolute top-0 h-full rounded-lg bg-gradient-to-b from-red-500/10 to-rose-500/10 border border-red-500/20"
+                animate={{ left: indicator.left, width: indicator.width }}
+                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              />
+            </div>
             {categories.map((cat) => (
               <button
                 key={cat}
+                ref={(el) => { catRefs.current[cat] = el; }}
                 onClick={() => setActiveCategory(cat)}
-                className={`relative px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
+                className={`relative px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors duration-150 ${
                   activeCategory === cat
-                    ? 'text-red-300 border border-red-500/30 shadow-lg shadow-red-500/5'
-                    : 'bg-white/[0.03] text-zinc-500 border border-white/5 hover:text-zinc-300 hover:border-white/10'
+                    ? 'text-red-300 border-red-500/30'
+                    : 'text-zinc-500 border-transparent hover:text-zinc-300'
                 }`}
-                style={activeCategory === cat ? { backgroundColor: 'rgba(239,68,68,0.1)' } : {}}
               >
                 {cat === 'All' ? 'All Videos' : cat}
-                {activeCategory === cat && (
-                  <motion.div
-                    layoutId="cat-bg"
-                    className={`absolute inset-0 rounded-lg bg-gradient-to-b ${catAccents[cat] || 'from-red-500'} opacity-10`}
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                  />
-                )}
               </button>
             ))}
           </motion.div>
