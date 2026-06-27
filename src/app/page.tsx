@@ -255,51 +255,92 @@ function AboutSection() {
 }
 
 function SkillsSection() {
-  const skills = [
-    { name: 'TypeScript', level: 85, color: '#3178c6' },
-    { name: 'JavaScript', level: 92, color: '#f1e05a' },
-    { name: 'React', level: 88, color: '#61dafb' },
-    { name: 'Next.js', level: 82, color: '#ffffff' },
-    { name: 'Python', level: 75, color: '#3572A5' },
-    { name: 'NestJS', level: 78, color: '#e0234e' },
-    { name: 'Kotlin', level: 70, color: '#A97BFF' },
-    { name: 'Tailwind', level: 85, color: '#06b6d4' },
+  const categories = [
+    {
+      label: 'Frontend & Mobile',
+      items: [
+        { name: 'React', level: 88, color: '#61dafb', icon: 'SiReact' },
+        { name: 'React Native', level: 75, color: '#61dafb', icon: 'SiReact' },
+        { name: 'Next.js', level: 82, color: '#ffffff', icon: 'SiNextdotjs' },
+        { name: 'TypeScript', level: 85, color: '#3178c6', icon: 'SiTypescript' },
+        { name: 'JavaScript', level: 92, color: '#f7df1e', icon: 'SiJavascript' },
+        { name: 'Tailwind', level: 85, color: '#06b6d4', icon: 'SiTailwindcss' },
+        { name: 'Android Studio', level: 72, color: '#3ddc84', icon: 'SiAndroidstudio' },
+      ],
+    },
+    {
+      label: 'Backend & APIs',
+      items: [
+        { name: 'NestJS', level: 78, color: '#e0234e', icon: 'SiNestjs' },
+        { name: 'Python', level: 75, color: '#3776ab', icon: 'SiPython' },
+        { name: 'Django', level: 68, color: '#092e20', icon: 'SiDjango' },
+        { name: 'Laravel', level: 65, color: '#ff2d20', icon: 'SiLaravel' },
+        { name: 'PHP', level: 70, color: '#777bb4', icon: 'SiPhp' },
+      ],
+    },
+    {
+      label: 'Languages & Tools',
+      items: [
+        { name: 'C++', level: 78, color: '#00599c', icon: 'SiCplusplus' },
+        { name: 'C#', level: 72, color: '#512bd4', icon: 'SiDotnet' },
+        { name: 'Kotlin', level: 70, color: '#7f52ff', icon: 'SiKotlin' },
+        { name: 'R', level: 60, color: '#276dc3', icon: 'SiR' },
+      ],
+    },
   ];
 
   return (
     <section className="py-28 bg-surface/50 relative">
       <div className="max-w-6xl mx-auto px-6">
         <FadeInUp>
-          <h2 className="text-3xl md:text-5xl font-bold text-content mb-12">Tech Stack</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-content mb-4">Tech Stack</h2>
+        </FadeInUp>
+        <FadeInUp delay={0.1}>
+          <p className="text-subtle text-lg mb-14 max-w-xl">Technologies I work with across web, mobile, and backend.</p>
         </FadeInUp>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {skills.map((s, i) => (
-            <FadeInUp key={s.name} delay={i * 0.03}>
-              <div className="p-4 rounded-xl bg-card/60 border border-line hover:border-line transition-colors">
-                <div className="flex items-center gap-3 mb-3">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold"
-                    style={{ backgroundColor: s.color + '20', color: s.color }}
-                  >
-                    {s.name.slice(0, 2)}
-                  </div>
-                  <span className="text-sm font-medium text-content">{s.name}</span>
-                </div>
-                <div className="h-1 bg-card rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${s.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full rounded-full will-change-transform"
-                    style={{ backgroundColor: s.color }}
-                  />
-                </div>
+        {categories.map((cat, ci) => (
+          <div key={cat.label} className="mb-12 last:mb-0">
+            <FadeInUp delay={ci * 0.1}>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-[10px] tracking-[0.2em] text-muted uppercase">{cat.label}</span>
+                <span className="flex-1 h-px bg-line" />
               </div>
             </FadeInUp>
-          ))}
-        </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {cat.items.map((s, i) => {
+                const Icon = require('react-icons/si')[s.icon];
+                return (
+                  <FadeInUp key={s.name} delay={ci * 0.08 + i * 0.03}>
+                    <div className="group p-4 rounded-xl bg-card/60 border border-line hover:border-[var(--hover-border)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm"
+                      style={{ '--hover-border': s.color + '40' } as React.CSSProperties}
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <div
+                          className="w-9 h-9 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                          style={{ backgroundColor: s.color + '15', color: s.color }}
+                        >
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-sm font-medium text-content">{s.name}</span>
+                      </div>
+                      <div className="h-1.5 bg-card rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${s.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: 0.2 + i * 0.03 + ci * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                          className="h-full rounded-full will-change-transform"
+                          style={{ backgroundColor: s.color }}
+                        />
+                      </div>
+                    </div>
+                  </FadeInUp>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
